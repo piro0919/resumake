@@ -1,5 +1,6 @@
 import ResumeForm, { ResumeFormProps } from './ResumeForm';
 import ResumeIframe, { ResumeIframeProps } from './ResumeIframe';
+import ContentWrapper from 'components/organisms/ContentWrapper';
 import Wrapper from 'components/templates/Wrapper';
 import withClientSize, { WithClientSize } from 'hocs/withClientSize';
 import React from 'react';
@@ -37,10 +38,16 @@ const Pages: React.FC<PagesProps> = ({
 
   return (
     <Wrapper clientHeight={clientHeight} clientWidth={clientWidth}>
-      <React.Fragment key="form">
-        <img alt="レジュメイク!" src="/images/logo.png" />
-        <ResumeForm handleSubmit2={handleSubmit} initialValue={initialValue} />
-      </React.Fragment>
+      <ContentWrapper key="content">
+        <header key="header">
+          <img alt="レジュメイク!" src="/images/logo.png" />
+        </header>
+        <ResumeForm
+          handleSubmit2={handleSubmit}
+          initialValue={initialValue}
+          key="form"
+        />
+      </ContentWrapper>
       <React.Fragment key="pdf">
         <ResumeIframe values={values} />
       </React.Fragment>

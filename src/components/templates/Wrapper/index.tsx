@@ -12,17 +12,17 @@ const Wrapper: React.FC<WrapperProps> = ({
   clientHeight,
   clientWidth
 }) => {
-  const [formWidth, setFormWidth] = React.useState(clientWidth / 2);
+  const [contentWidth, setFormWidth] = React.useState(clientWidth / 2);
   const [pdfWidth, setPdfWidth] = React.useState(clientWidth / 2);
 
-  const { form, pdf } = React.useMemo(
+  const { content, pdf } = React.useMemo(
     () =>
       (children as React.ReactNode[]).reduce<{
-        form?: React.ReactNode;
+        content?: React.ReactNode;
         pdf?: React.ReactNode;
       }>((previousValue, currentValue) => {
         const { key } = currentValue as {
-          key: "form" | "pdf";
+          key: "content" | "pdf";
           [key: string]: any;
         };
 
@@ -47,9 +47,9 @@ const Wrapper: React.FC<WrapperProps> = ({
 
   return (
     <Div style={{ height: clientHeight }}>
-      <div className="form" style={{ width: formWidth }}>
+      <div className="content" style={{ width: contentWidth }}>
         <ReactResizeDetector handleWidth={true} onResize={handleResize} />
-        {form}
+        {content}
       </div>
       <div style={{ width: pdfWidth }}>{pdf}</div>
     </Div>
