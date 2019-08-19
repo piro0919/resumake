@@ -1,7 +1,7 @@
-import moment from "moment";
-import pdfMake, { PageSize } from "pdfmake/build/pdfmake";
-import pdfFonts from "pdfmake/build/vfs_fonts";
-import React from "react";
+import moment, { Moment } from 'moment';
+import pdfMake, { PageSize } from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+import React from 'react';
 
 interface Project {
   content: string;
@@ -29,6 +29,7 @@ interface Project {
 export interface ResumeIframeProps {
   values: {
     belongs: string;
+    birthday: Moment;
     education: string;
     engineerCode: string;
     expertise: string;

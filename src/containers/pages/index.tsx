@@ -1,20 +1,26 @@
-import ResumeForm, { ResumeFormProps } from "./ResumeForm";
-import ResumeIframe, { ResumeIframeProps } from "./ResumeIframe";
-import Logo from "components/atoms/Logo";
-import ContentWrapper from "components/organisms/ContentWrapper";
-import Wrapper from "components/templates/Wrapper";
-import withClientSize, { WithClientSize } from "hocs/withClientSize";
-import React from "react";
-import { RouteComponentProps } from "react-router-dom";
+import ResumeForm, { ResumeFormProps } from './ResumeForm';
+import ResumeIframe, { ResumeIframeProps } from './ResumeIframe';
+import LogoImage from 'components/atoms/LogoImage';
+import ContentBlock from 'components/organisms/ContentBlock';
+import WrapperBlock from 'components/templates/WrapperBlock';
+import withClientSize, { WithClientSize } from 'hocs/withClientSize';
+import moment from 'moment';
+import React from 'react';
+import { RouteComponentProps } from 'react-router-dom';
 
 export type PagesProps = RouteComponentProps & WithClientSize;
 
 const Pages: React.FC<PagesProps> = ({
   clientSize: { clientHeight, clientWidth }
 }) => {
-  const initialValue = React.useMemo<ResumeIframeProps["values"]>(
+  const initialValue = React.useMemo<ResumeFormProps["values"]>(
     () => ({
       belongs: "",
+      birthday: {
+        date: moment().get("date"),
+        month: moment().get("month"),
+        year: moment().get("year")
+      },
       education: "",
       engineerCode: "",
       expertise: "",
@@ -61,21 +67,21 @@ const Pages: React.FC<PagesProps> = ({
   );
 
   return (
-    <Wrapper clientHeight={clientHeight} clientWidth={clientWidth}>
-      <ContentWrapper key="content">
+    <WrapperBlock clientHeight={clientHeight} clientWidth={clientWidth}>
+      <ContentBlock key="content">
         <header key="header">
-          <Logo />
+          <LogoImage />
         </header>
         <ResumeForm
           handleSubmit2={handleSubmit}
           initialValue={initialValue}
           key="form"
         />
-      </ContentWrapper>
+      </ContentBlock>
       <React.Fragment key="pdf">
         <ResumeIframe values={values} />
       </React.Fragment>
-    </Wrapper>
+    </WrapperBlock>
   );
 };
 

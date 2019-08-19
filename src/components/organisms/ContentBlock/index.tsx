@@ -1,7 +1,7 @@
-import React from "react";
-import "./style.sass";
+import './style.sass';
+import React from 'react';
 
-const ContentWrapper: React.FC = ({ children }) => {
+const ContentBlock: React.FC = ({ children }) => {
   const { form, header } = React.useMemo(
     () =>
       (children as React.ReactNode[]).reduce<{
@@ -19,11 +19,11 @@ const ContentWrapper: React.FC = ({ children }) => {
   );
 
   return (
-    <div styleName="content-wrapper">
+    <div styleName="content-block">
       <div>{header}</div>
       <div styleName="form">{form}</div>
     </div>
   );
 };
 
-export default ContentWrapper;
+export default ContentBlock;

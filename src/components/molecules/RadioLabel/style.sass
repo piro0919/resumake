@@ -1,0 +1,21 @@
+.radio-label
+  align-items: center
+  display: flex
+
+  .styled-radio
+    align-items: center
+    border: 1px solid #d22f7d
+    border-radius: 50%
+    display: flex
+    height: 10px
+    justify-content: center
+    margin-right: 2.5px
+    width: 10px
+
+    &.checked::before
+      background-color: #d22f7d
+      border-radius: 50%
+      content: ""
+      display: block
+      height: 75%
+      width: 75%

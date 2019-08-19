@@ -1,13 +1,13 @@
-import React from "react";
-import ReactResizeDetector from "react-resize-detector";
-import "./style.sass";
+import './style.sass';
+import React from 'react';
+import ReactResizeDetector from 'react-resize-detector';
 
-export interface WrapperProps {
+export interface WrapperBlockProps {
   clientHeight: number;
   clientWidth: number;
 }
 
-const Wrapper: React.FC<WrapperProps> = ({
+const WrapperBlock: React.FC<WrapperBlockProps> = ({
   children,
   clientHeight,
   clientWidth
@@ -46,7 +46,7 @@ const Wrapper: React.FC<WrapperProps> = ({
   }, [clientWidth, setFormWidth, setPdfWidth]);
 
   return (
-    <div style={{ height: clientHeight }} styleName="wrapper">
+    <div style={{ height: clientHeight }} styleName="wrapper-block">
       <div style={{ width: contentWidth }} styleName="content">
         <ReactResizeDetector handleWidth={true} onResize={handleResize} />
         {content}
@@ -56,4 +56,4 @@ const Wrapper: React.FC<WrapperProps> = ({
   );
 };
 
-export default Wrapper;
+export default WrapperBlock;

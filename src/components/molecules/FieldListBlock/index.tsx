@@ -1,7 +1,7 @@
-import React from "react";
-import "./style.sass";
+import './style.sass';
+import React from 'react';
 
-const FieldListWrapper: React.FC = ({ children }) => {
+const FieldListBlock: React.FC = ({ children }) => {
   const { fieldList, footer } = React.useMemo(
     () =>
       (children as React.ReactNode[]).reduce<{
@@ -19,11 +19,11 @@ const FieldListWrapper: React.FC = ({ children }) => {
   );
 
   return (
-    <div styleName="field-list-wrapper">
+    <div styleName="field-list-block">
       {fieldList}
       <div styleName="footer">{footer}</div>
     </div>
   );
 };
 
-export default FieldListWrapper;
+export default FieldListBlock;
