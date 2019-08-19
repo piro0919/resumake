@@ -1,15 +1,15 @@
-import StyledSection from './styles';
-import React from 'react';
+import React from "react";
+import "./style.sass";
 
 export interface SectionProps {
   heading: string;
 }
 
 const Section: React.FC<SectionProps> = ({ children, heading }) => (
-  <StyledSection>
-    <h2 className="heading">{heading}</h2>
+  <section styleName="section">
+    <h2 styleName="heading">{heading}</h2>
     {children}
-  </StyledSection>
+  </section>
 );
 
 export default Section;

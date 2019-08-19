@@ -1,5 +1,5 @@
-import Ul from './styles';
-import React from 'react';
+import React from "react";
+import "./style.sass";
 
 const Sections: React.FC = ({ children }) => {
   const items = React.useMemo(
@@ -15,7 +15,7 @@ const Sections: React.FC = ({ children }) => {
     [children]
   );
 
-  return <Ul>{items}</Ul>;
+  return <ul styleName="sections">{items}</ul>;
 };
 
 export default Sections;

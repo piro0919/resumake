@@ -1,5 +1,5 @@
-import Dl from './styles';
-import React from 'react';
+import React from "react";
+import "./style.sass";
 
 interface Field {
   description: React.ReactNode;
@@ -19,7 +19,7 @@ const FieldList: React.FC<FieldListProps> = ({ fields }) => {
     </React.Fragment>
   ));
 
-  return <Dl>{items}</Dl>;
+  return <dl styleName="field-list">{items}</dl>;
 };
 
 export default FieldList;

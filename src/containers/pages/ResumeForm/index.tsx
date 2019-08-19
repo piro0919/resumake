@@ -1,16 +1,14 @@
-import Input from './Input';
-import Textarea from './Textarea';
-import Section from 'components/atoms/Section';
-import FieldList from 'components/molecules/FieldList';
-import Sections from 'components/molecules/Sections';
-import {
-  Field,
-  FieldArray,
-  Form,
-  FormikProps,
-  withFormik
-  } from 'formik';
-import React from 'react';
+import Input from "./Input";
+import LabeledRadio from "./LabeledRadio";
+import Textarea from "./Textarea";
+import Button from "components/atoms/Button";
+import Section from "components/atoms/Section";
+import FieldList from "components/molecules/FieldList";
+import FieldListWrapper from "components/molecules/FieldListWrapper";
+import ProjectsWrapper from "components/molecules/ProjectsWrapper";
+import Sections from "components/molecules/Sections";
+import { Field, FieldArray, Form, FormikProps, withFormik } from "formik";
+import React from "react";
 
 interface Project {
   content: string;
@@ -44,6 +42,7 @@ interface Values {
   projects: Project[];
   qualification: string;
   selfIntroduction: string;
+  sex: "man" | "woman";
   specialty: string;
   specialtyBusiness: string;
 }
@@ -55,186 +54,273 @@ interface OuterProps {
 
 export type ResumeFormProps = FormikProps<Values> & OuterProps;
 
-const ResumeForm: React.FC<ResumeFormProps> = ({ values: { projects } }) => {
-  return (
-    <Form>
-      <Sections>
-        {[
-          <Section heading="個人情報" key="個人情報">
-            <div>
-              <FieldList
-                fields={[
-                  {
-                    description: (
-                      <Field
-                        component={Input}
-                        name="engineerCode"
-                        placeholder="ENG0123456789"
-                      />
-                    ),
-                    key: "engineerCode",
-                    term: "技術者コード"
-                  },
-                  {
-                    description: (
-                      <Field
-                        component={Input}
-                        name="belongs"
-                        placeholder="個人事業主"
-                      />
-                    ),
-                    key: "belongs",
-                    term: "所属"
-                  },
-                  {
-                    description: (
-                      <Field
-                        component={Input}
-                        name="qualification"
-                        placeholder="基本情報技術者"
-                      />
-                    ),
-                    key: "qualification",
-                    term: "資格"
-                  },
-                  {
-                    description: (
-                      <Field
-                        component={Input}
-                        name="education"
-                        placeholder="○○大学 △△学部 □□学科 卒業"
-                      />
-                    ),
-                    key: "education",
-                    term: "学歴"
-                  },
-                  {
-                    description: (
-                      <Field
-                        component={Input}
-                        name="nearestStation"
-                        placeholder="山手線 新宿駅"
-                      />
-                    ),
-                    key: "nearestStation",
-                    term: "最寄り駅"
-                  }
-                ]}
-              />
-            </div>
-          </Section>,
-          <Section heading="得意なこと" key="得意なこと">
-            <div>
-              <dl>
-                <dt>得意分野</dt>
-                <dd>
+const ResumeForm: React.FC<ResumeFormProps> = ({
+  handleSubmit,
+  values: { projects }
+}) => (
+  <Form>
+    <Sections>
+      {[
+        <Section heading="個人情報" key="個人情報">
+          <FieldList
+            fields={[
+              {
+                description: (
+                  <Field
+                    component={Input}
+                    name="engineerCode"
+                    onBlur={handleSubmit}
+                    placeholder="ENG0123456789"
+                  />
+                ),
+                key: "engineerCode",
+                term: "技術者コード"
+              },
+              {
+                description: (
+                  <Field
+                    component={Input}
+                    name="belongs"
+                    onBlur={handleSubmit}
+                    placeholder="個人事業主"
+                  />
+                ),
+                key: "belongs",
+                term: "所属"
+              },
+              {
+                description: (
+                  <div style={{ display: "flex" }}>
+                    <Field
+                      component={LabeledRadio}
+                      id="man"
+                      label="男性"
+                      name="sex"
+                      onChange={handleSubmit}
+                    />
+                    <Field
+                      component={LabeledRadio}
+                      id="woman"
+                      label="女性"
+                      name="sex"
+                      onChange={handleSubmit}
+                    />
+                  </div>
+                ),
+                key: "sex",
+                term: "性別"
+              },
+              {
+                description: (
+                  <Field
+                    component={Input}
+                    name="qualification"
+                    onBlur={handleSubmit}
+                    placeholder="基本情報技術者"
+                  />
+                ),
+                key: "qualification",
+                term: "資格"
+              },
+              {
+                description: (
+                  <Field
+                    component={Input}
+                    name="education"
+                    onBlur={handleSubmit}
+                    placeholder="東京大学 理学部 情報科学科 卒業"
+                  />
+                ),
+                key: "education",
+                term: "学歴"
+              },
+              {
+                description: (
+                  <Field
+                    component={Input}
+                    name="nearestStation"
+                    onBlur={handleSubmit}
+                    placeholder="山手線 新宿駅"
+                  />
+                ),
+                key: "nearestStation",
+                term: "最寄り駅"
+              }
+            ]}
+          />
+        </Section>,
+        <Section heading="得意なこと" key="得意なこと">
+          <FieldList
+            fields={[
+              {
+                description: (
                   <Field
                     component={Input}
                     name="specialty"
+                    onBlur={handleSubmit}
                     placeholder="実装"
                   />
-                </dd>
-                <dt>得意技術</dt>
-                <dd>
+                ),
+                key: "specialty",
+                term: "得意分野"
+              },
+              {
+                description: (
                   <Field
                     component={Input}
                     name="expertise"
+                    onBlur={handleSubmit}
                     placeholder="HTML, CSS, JavaScript"
                   />
-                </dd>
-                <dt>得意業務</dt>
-                <dd>
+                ),
+                key: "expertise",
+                term: "得意技術"
+              },
+              {
+                description: (
                   <Field
                     component={Input}
                     name="specialtyBusiness"
-                    placeholder="Webアプリケーション開発"
+                    onBlur={handleSubmit}
+                    placeholder="Webサービス開発"
                   />
-                </dd>
-              </dl>
-            </div>
-          </Section>,
-          <Section heading="自己PR" key="自己PR">
-            <dl>
-              <dt>自己PR</dt>
-              <dd>
-                <Field component={Textarea} name="selfIntroduction" />
-              </dd>
-            </dl>
-          </Section>,
-          <Section heading="経歴" key="経歴">
-            <dl>
-              <dt>経歴</dt>
-              <dd>
-                <FieldArray
-                  name="projects"
-                  render={({ push }) => (
-                    <div>
-                      {projects.map((_, index) => (
-                        <dl key={index}>
-                          <dt>プロジェクト名</dt>
-                          <dd>
-                            <Field
-                              component={Input}
-                              name={`projects.${index}.title`}
-                            />
-                          </dd>
-                          <dt>業務内容</dt>
-                          <dd>
-                            <Field
-                              component={Textarea}
-                              name={`projects.${index}.content`}
-                            />
-                          </dd>
-                          <dt>役割</dt>
-                          <dd>
-                            <Field
-                              component={Input}
-                              name={`projects.${index}.role`}
-                            />
-                          </dd>
-                        </dl>
-                      ))}
-                      <button
-                        onClick={e => {
-                          push({
-                            content: "",
-                            dbList: [],
-                            from: "",
-                            fwMwToolList: [],
-                            languageList: [],
-                            pageBreakAfter: false,
-                            process: {
-                              requirementDefinition: false,
-                              basicDesign: false,
-                              detailedDesign: false,
-                              mountingSingleUnit: false,
-                              combinedTest: false,
-                              comprehensiveTest: false,
-                              maintenanceAndOperation: false
-                            },
-                            role: "",
-                            serverOsList: [],
-                            team: 0,
-                            title: "",
-                            to: ""
-                          });
+                ),
+                key: "specialtyBusiness",
+                term: "得意業務"
+              }
+            ]}
+          />
+        </Section>,
+        <Section heading="自己PR" key="自己PR">
+          <Field
+            component={Textarea}
+            name="selfIntroduction"
+            onBlur={handleSubmit}
+          />
+        </Section>,
+        <Section heading="経歴" key="経歴">
+          <FieldArray
+            name="projects"
+            render={({ push, remove }) => (
+              <ProjectsWrapper
+                projects={projects.map((_, index) => ({
+                  key: `projects.${index}`,
+                  node: (
+                    <FieldListWrapper>
+                      <FieldList
+                        fields={[
+                          {
+                            description: (
+                              <Field
+                                component={Input}
+                                name={`projects.${index}.title`}
+                                onBlur={handleSubmit}
+                                placeholder={`プロジェクト${index + 1}`}
+                              />
+                            ),
+                            key: `projects.${index}.title`,
+                            term: "プロジェクト名"
+                          },
+                          {
+                            description: (
+                              <Field
+                                component={Textarea}
+                                name={`projects.${index}.content`}
+                                onBlur={handleSubmit}
+                              />
+                            ),
+                            key: `projects.${index}.content`,
+                            term: "業務内容"
+                          },
+                          {
+                            description: (
+                              <Field
+                                component={Input}
+                                name={`projects.${index}.role`}
+                                onBlur={handleSubmit}
+                                placeholder="PG"
+                              />
+                            ),
+                            key: `projects.${index}.role`,
+                            term: "役割"
+                          },
+                          {
+                            description: (
+                              <React.Fragment>
+                                <Field
+                                  component={Input}
+                                  min={0}
+                                  name={`projects.${index}.team`}
+                                  onBlur={handleSubmit}
+                                  placeholder="0"
+                                  type="number"
+                                />
+                                名
+                              </React.Fragment>
+                            ),
+                            key: `projects.${index}.team`,
+                            term: "規模"
+                          }
+                        ]}
+                        key="fieldList"
+                      />
+                      <Button
+                        key="footer"
+                        onClick={() => {
+                          remove(index);
+
+                          // 強引
+                          setTimeout(() => {
+                            handleSubmit();
+                          }, 1000);
                         }}
                         type="button"
                       >
-                        push
-                      </button>
-                    </div>
-                  )}
-                />
-              </dd>
-            </dl>
-          </Section>
-        ]}
-      </Sections>
-      <button type="submit">submit</button>
-    </Form>
-  );
-};
+                        削除
+                      </Button>
+                    </FieldListWrapper>
+                  )
+                }))}
+                footer={
+                  <Button
+                    onClick={() => {
+                      push({
+                        content: "",
+                        dbList: [],
+                        from: "",
+                        fwMwToolList: [],
+                        languageList: [],
+                        pageBreakAfter: false,
+                        process: {
+                          requirementDefinition: false,
+                          basicDesign: false,
+                          detailedDesign: false,
+                          mountingSingleUnit: false,
+                          combinedTest: false,
+                          comprehensiveTest: false,
+                          maintenanceAndOperation: false
+                        },
+                        role: "",
+                        serverOsList: [],
+                        team: 0,
+                        title: "",
+                        to: ""
+                      });
+                    }}
+                    type="submit"
+                  >
+                    追加
+                  </Button>
+                }
+              />
+            )}
+          />
+        </Section>
+      ]}
+    </Sections>
+    <Button type="submit">更新</Button>
+  </Form>
+);
 
 export default withFormik<OuterProps, Values>({
   handleSubmit: (values, { props: { handleSubmit2 } }) => {

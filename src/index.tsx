@@ -1,17 +1,11 @@
-import * as serviceWorker from './serviceWorker';
-import { GlobalStyle } from './styledComponents';
-import Containers from 'containers';
-import 'moment/locale/ja';
-import React from 'react';
-import ReactDOM from 'react-dom';
-import 'ress';
+import * as serviceWorker from "./serviceWorker";
+import Containers from "./containers";
+import "moment/locale/ja";
+import React from "react";
+import ReactDOM from "react-dom";
+import "ress";
+import "./styles/global.sass";
 
-ReactDOM.render(
-  <React.Fragment>
-    <GlobalStyle />
-    <Containers />
-  </React.Fragment>,
-  document.getElementById("root")
-);
+ReactDOM.render(<Containers />, document.getElementById("root"));
 
 serviceWorker.register();

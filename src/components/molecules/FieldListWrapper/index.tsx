@@ -1,15 +1,15 @@
 import React from "react";
 import "./style.sass";
 
-const ContentWrapper: React.FC = ({ children }) => {
-  const { form, header } = React.useMemo(
+const FieldListWrapper: React.FC = ({ children }) => {
+  const { fieldList, footer } = React.useMemo(
     () =>
       (children as React.ReactNode[]).reduce<{
-        form?: React.ReactNode;
-        header?: React.ReactNode;
+        fieldList?: React.ReactNode;
+        footer?: React.ReactNode;
       }>((previousValue, currentValue) => {
         const { key } = currentValue as {
-          key: "form" | "header";
+          key: "fieldList" | "footer";
           [key: string]: any;
         };
 
@@ -19,11 +19,11 @@ const ContentWrapper: React.FC = ({ children }) => {
   );
 
   return (
-    <div styleName="content-wrapper">
-      <div>{header}</div>
-      <div styleName="form">{form}</div>
+    <div styleName="field-list-wrapper">
+      {fieldList}
+      <div styleName="footer">{footer}</div>
     </div>
   );
 };
 
-export default ContentWrapper;
+export default FieldListWrapper;

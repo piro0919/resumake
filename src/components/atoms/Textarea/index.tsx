@@ -1,16 +1,10 @@
-import StyledTextarea from './styles';
-import React from 'react';
+import React from "react";
+import "./style.sass";
 
-export interface TextareaProps {
-  name: string;
-  onBlur: (e: React.FocusEvent<HTMLTextAreaElement>) => void;
-  onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
-  placeholder?: string;
-  value: any;
-}
+export type TextareaProps = React.TextareaHTMLAttributes<any>;
 
 const Textarea: React.FC<TextareaProps> = props => (
-  <StyledTextarea {...props} />
+  <textarea {...props} styleName="textarea" />
 );
 
 export default Textarea;

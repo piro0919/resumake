@@ -1,6 +1,6 @@
-import Div from './styles';
-import React from 'react';
-import ReactResizeDetector from 'react-resize-detector';
+import React from "react";
+import ReactResizeDetector from "react-resize-detector";
+import "./style.sass";
 
 export interface WrapperProps {
   clientHeight: number;
@@ -46,13 +46,13 @@ const Wrapper: React.FC<WrapperProps> = ({
   }, [clientWidth, setFormWidth, setPdfWidth]);
 
   return (
-    <Div style={{ height: clientHeight }}>
-      <div className="content" style={{ width: contentWidth }}>
+    <div style={{ height: clientHeight }} styleName="wrapper">
+      <div style={{ width: contentWidth }} styleName="content">
         <ReactResizeDetector handleWidth={true} onResize={handleResize} />
         {content}
       </div>
       <div style={{ width: pdfWidth }}>{pdf}</div>
-    </Div>
+    </div>
   );
 };
 

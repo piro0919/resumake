@@ -11,6 +11,7 @@
     "@types/node": "12.7.2",
     "@types/pdfmake": "0.1.8",
     "@types/react": "16.9.2",
+    "@types/react-css-modules": "4.6.2",
     "@types/react-dom": "16.8.5",
     "@types/react-resize-detector": "4.0.2",
     "@types/react-router-dom": "4.3.4",
@@ -20,6 +21,7 @@
     "babel-eslint": "10.0.2",
     "babel-loader": "8.0.6",
     "babel-plugin-named-asset-import": "^0.3.3",
+    "babel-plugin-react-css-modules": "5.2.6",
     "babel-preset-react-app": "^9.0.1",
     "camelcase": "^5.2.0",
     "case-sensitive-paths-webpack-plugin": "2.2.0",
@@ -45,6 +47,7 @@
     "mini-css-extract-plugin": "0.5.0",
     "moment": "2.24.0",
     "moment-locales-webpack-plugin": "1.1.0",
+    "node-sass": "4.12.0",
     "optimize-css-assets-webpack-plugin": "5.0.3",
     "pdfmake": "0.1.58",
     "pnp-webpack-plugin": "1.5.0",
@@ -53,6 +56,7 @@
     "postcss-normalize": "7.0.1",
     "postcss-preset-env": "6.7.0",
     "postcss-safe-parser": "4.0.1",
+    "postcss-sass": "0.4.1",
     "react": "^16.9.0",
     "react-app-polyfill": "^1.0.2",
     "react-dev-utils": "^9.0.3",
@@ -97,6 +101,18 @@
     ]
   },
   "babel": {
+    "plugins": [
+      [
+        "react-css-modules",
+        {
+          "filetypes": {
+            ".sass": {
+              "syntax": "postcss-sass"
+            }
+          }
+        }
+      ]
+    ],
     "presets": [
       "react-app"
     ]

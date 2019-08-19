@@ -1,7 +1,7 @@
-import moment from 'moment';
-import pdfMake, { PageSize } from 'pdfmake/build/pdfmake';
-import pdfFonts from 'pdfmake/build/vfs_fonts';
-import React from 'react';
+import moment from "moment";
+import pdfMake, { PageSize } from "pdfmake/build/pdfmake";
+import pdfFonts from "pdfmake/build/vfs_fonts";
+import React from "react";
 
 interface Project {
   content: string;
@@ -36,6 +36,7 @@ export interface ResumeIframeProps {
     projects: Project[];
     qualification: string;
     selfIntroduction: string;
+    sex: "man" | "woman";
     specialty: string;
     specialtyBusiness: string;
   };
@@ -66,6 +67,7 @@ const ResumeIframe: React.FC<ResumeIframeProps> = ({ values }) => {
       projects,
       qualification,
       selfIntroduction,
+      sex,
       specialty,
       specialtyBusiness
     } = values;
@@ -104,7 +106,7 @@ const ResumeIframe: React.FC<ResumeIframeProps> = ({ values }) => {
                   "年齢",
                   `満${moment().diff(moment("19890919"), "years")}歳`,
                   "性別",
-                  "男性"
+                  `${sex === "man" ? "男" : "女"}性`
                 ],
                 ["資格", qualification, "学歴", education],
                 ["稼働", "2019年10月1日～", "最寄り駅", nearestStation]
