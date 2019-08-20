@@ -23,7 +23,7 @@ const WrapperBlock: React.FC<WrapperBlockProps> = ({
         pdf?: React.ReactNode;
       }>((previousValue, currentValue) => {
         const { key } = currentValue as {
-          key: "form" | "menu" | "pdf";
+          key: 'form' | 'menu' | 'pdf';
           [key: string]: any;
         };
 

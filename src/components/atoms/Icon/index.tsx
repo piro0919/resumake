@@ -6,9 +6,9 @@ export interface IconProps extends IconBaseProps {
 }
 
 const Icon: React.FC<IconProps> = ({
-  color = "#d22f7d",
+  color = '#d22f7d',
   iconType: IconType,
-  size = "100%"
+  size = '100%'
 }) => <IconType color={color} size={size} />;
 
 export default Icon;

@@ -1,9 +1,11 @@
-import RadioLabelComponent, { RadioLabelProps as RadioLabelComponentProps } from 'components/molecules/RadioLabel';
+import RadioLabelComponent, {
+  RadioLabelProps as RadioLabelComponentProps
+} from 'components/molecules/RadioLabel';
 import { FieldProps } from 'formik';
 import React from 'react';
 
 export type RadioLabelProps = FieldProps &
-  Pick<RadioLabelComponentProps, "id" | "label">;
+  Pick<RadioLabelComponentProps, 'id' | 'label'>;
 
 const RadioLabel: React.FC<RadioLabelProps> = ({ field, form, ...props }) => {
   const { value } = field;

@@ -9,7 +9,7 @@ const FieldWithIconBlock: React.FC = ({ children }) => {
         icon?: React.ReactNode;
       }>((previousValue, currentValue) => {
         const { key } = currentValue as {
-          key: "field" | "icon";
+          key: 'field' | 'icon';
           [key: string]: any;
         };
 

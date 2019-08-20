@@ -11,7 +11,7 @@ const RadioLabel: React.FC<RadioLabelProps> = ({ label, ...props }) => {
 
   return (
     <label styleName="radio-label">
-      <div styleName={`styled-radio ${checked ? "checked" : ""}`} />
+      <div styleName={`styled-radio ${checked ? 'checked' : ''}`} />
       {label}
       <RadioInput {...props} />
     </label>

@@ -1,4 +1,9 @@
 {
   "editor.formatOnSave": true,
-  "sassFormat.indent": 2
+  "sassFormat.indent": 2,
+  "sassFormat.useSingleQuotes": true,
+  "prettier.singleQuote": true,
+  "prettier.stylelintIntegration": true,
+  "importSorter.generalConfiguration.sortOnBeforeSave": true,
+  "importSorter.importStringConfiguration.tabSize": 2
 }

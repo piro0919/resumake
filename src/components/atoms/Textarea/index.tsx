@@ -1,5 +1,5 @@
-import React from "react";
-import "./style.sass";
+import React from 'react';
+import './style.sass';
 
 export type TextareaProps = React.TextareaHTMLAttributes<any>;
 

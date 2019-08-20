@@ -7,7 +7,7 @@ const Menu: React.FC = () => {
       <dl>
         <dt>ファイル</dt>
         <dd>
-          <dl style={{ background: "#eee", display: "none" }}>
+          <dl style={{ background: '#eee', display: 'none' }}>
             <dt>名前を付けてレジュメイクデータを保存</dt>
             <dd />
             <dt>保存</dt>
@@ -18,7 +18,7 @@ const Menu: React.FC = () => {
         </dd>
         <dt>フォーム</dt>
         <dd>
-          <dl style={{ background: "#eee", display: "none" }}>
+          <dl style={{ background: '#eee', display: 'none' }}>
             <dt>更新</dt>
             <dd />
             <dt>自動更新</dt>

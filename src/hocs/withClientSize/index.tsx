@@ -11,7 +11,7 @@ export interface WithClientSize {
 }
 
 const { Consumer, Provider } = React.createContext<
-  WithClientSize["clientSize"]
+  WithClientSize['clientSize']
 >(clientSize);
 
 function withClientSize<TOutter>(
@@ -19,7 +19,7 @@ function withClientSize<TOutter>(
 ): React.FC<TOutter & WithClientSize> {
   const ClientSize: React.FC<TOutter & WithClientSize> = props => {
     const { clientHeight, clientWidth } = React.useMemo(() => {
-      if (typeof window === "undefined") {
+      if (typeof window === 'undefined') {
         return {
           clientHeight: 0,
           clientWidth: 0
@@ -51,10 +51,10 @@ function withClientSize<TOutter>(
 
       handleResize();
 
-      window.addEventListener("resize", debounce(handleResize, 250));
+      window.addEventListener('resize', debounce(handleResize, 250));
 
       return () => {
-        window.removeEventListener("resize", handleResize);
+        window.removeEventListener('resize', handleResize);
       };
     }, [setCurrentClientSize]);
 

@@ -12,13 +12,7 @@ import LabeledRadioFieldList from 'components/molecules/LabeledRadioFieldList';
 import ProjectListBlock from 'components/molecules/ProjectListBlock';
 import SectionList from 'components/molecules/SectionList';
 import SmallFieldListBlock from 'components/molecules/SmallFieldListBlock';
-import {
-  Field,
-  FieldArray,
-  Form,
-  FormikProps,
-  withFormik
-  } from 'formik';
+import { Field, FieldArray, Form, FormikProps, withFormik } from 'formik';
 import moment, { Moment } from 'moment';
 import React from 'react';
 import { FiMinusSquare, FiPlusSquare } from 'react-icons/fi';
@@ -66,17 +60,17 @@ interface Values {
   projects: Project[];
   qualification: string;
   selfIntroduction: string;
-  sex: "man" | "woman";
+  sex: 'man' | 'woman';
   specialty: string;
   specialtyBusiness: string;
 }
 
-interface SubmitValuesProject extends Omit<Project, "from" | "to"> {
+interface SubmitValuesProject extends Omit<Project, 'from' | 'to'> {
   from: Moment;
   to: Moment;
 }
 
-interface SubmitValues extends Omit<Values, "birthday" | "projects"> {
+interface SubmitValues extends Omit<Values, 'birthday' | 'projects'> {
   birthday: Moment;
   projects: SubmitValuesProject[];
 }
@@ -123,8 +117,8 @@ const ResumeForm: React.FC<ResumeFormProps> = ({
                       placeholder="ENG0123456789"
                     />
                   ),
-                  key: "engineerCode",
-                  term: "技術者コード"
+                  key: 'engineerCode',
+                  term: '技術者コード'
                 },
                 {
                   description: (
@@ -134,15 +128,15 @@ const ResumeForm: React.FC<ResumeFormProps> = ({
                       placeholder="個人事業主"
                     />
                   ),
-                  key: "belongs",
-                  term: "所属"
+                  key: 'belongs',
+                  term: '所属'
                 },
                 {
                   description: (
                     <LabeledRadioFieldList
                       fields={[
                         {
-                          key: "birthday.year",
+                          key: 'birthday.year',
                           value: (
                             <Field
                               component={SelectLabel}
@@ -163,7 +157,7 @@ const ResumeForm: React.FC<ResumeFormProps> = ({
                           )
                         },
                         {
-                          key: "birthday.month",
+                          key: 'birthday.month',
                           value: (
                             <Field
                               component={SelectLabel}
@@ -179,7 +173,7 @@ const ResumeForm: React.FC<ResumeFormProps> = ({
                           )
                         },
                         {
-                          key: "birthday.date",
+                          key: 'birthday.date',
                           value: (
                             <Field
                               component={SelectLabel}
@@ -191,7 +185,7 @@ const ResumeForm: React.FC<ResumeFormProps> = ({
                                   moment()
                                     .year(year)
                                     .month(month)
-                                    .endOf("month")
+                                    .endOf('month')
                                     .date()
                                 ).keys()
                               ).map(value => (
@@ -205,15 +199,15 @@ const ResumeForm: React.FC<ResumeFormProps> = ({
                       ]}
                     />
                   ),
-                  key: "birthday",
-                  term: "生年月日"
+                  key: 'birthday',
+                  term: '生年月日'
                 },
                 {
                   description: (
                     <LabeledRadioFieldList
                       fields={[
                         {
-                          key: "man",
+                          key: 'man',
                           value: (
                             <Field
                               component={RadioLabel}
@@ -224,7 +218,7 @@ const ResumeForm: React.FC<ResumeFormProps> = ({
                           )
                         },
                         {
-                          key: "woman",
+                          key: 'woman',
                           value: (
                             <Field
                               component={RadioLabel}
@@ -237,8 +231,8 @@ const ResumeForm: React.FC<ResumeFormProps> = ({
                       ]}
                     />
                   ),
-                  key: "sex",
-                  term: "性別"
+                  key: 'sex',
+                  term: '性別'
                 },
                 {
                   description: (
@@ -248,8 +242,8 @@ const ResumeForm: React.FC<ResumeFormProps> = ({
                       placeholder="基本情報技術者"
                     />
                   ),
-                  key: "qualification",
-                  term: "資格"
+                  key: 'qualification',
+                  term: '資格'
                 },
                 {
                   description: (
@@ -259,8 +253,8 @@ const ResumeForm: React.FC<ResumeFormProps> = ({
                       placeholder="東京大学 理学部 情報科学科 卒業"
                     />
                   ),
-                  key: "education",
-                  term: "学歴"
+                  key: 'education',
+                  term: '学歴'
                 },
                 {
                   description: (
@@ -270,8 +264,8 @@ const ResumeForm: React.FC<ResumeFormProps> = ({
                       placeholder="山手線 新宿駅"
                     />
                   ),
-                  key: "nearestStation",
-                  term: "最寄り駅"
+                  key: 'nearestStation',
+                  term: '最寄り駅'
                 }
               ]}
             />
@@ -287,8 +281,8 @@ const ResumeForm: React.FC<ResumeFormProps> = ({
                       placeholder="実装"
                     />
                   ),
-                  key: "specialty",
-                  term: "得意分野"
+                  key: 'specialty',
+                  term: '得意分野'
                 },
                 {
                   description: (
@@ -298,8 +292,8 @@ const ResumeForm: React.FC<ResumeFormProps> = ({
                       placeholder="HTML, CSS, JavaScript"
                     />
                   ),
-                  key: "expertise",
-                  term: "得意技術"
+                  key: 'expertise',
+                  term: '得意技術'
                 },
                 {
                   description: (
@@ -309,8 +303,8 @@ const ResumeForm: React.FC<ResumeFormProps> = ({
                       placeholder="Webサービス開発"
                     />
                   ),
-                  key: "specialtyBusiness",
-                  term: "得意業務"
+                  key: 'specialtyBusiness',
+                  term: '得意業務'
                 }
               ]}
             />
@@ -334,7 +328,7 @@ const ResumeForm: React.FC<ResumeFormProps> = ({
                                 <LabeledRadioFieldList
                                   fields={[
                                     {
-                                      key: "projects.from.year",
+                                      key: 'projects.from.year',
                                       value: (
                                         <Field
                                           component={SelectLabel}
@@ -357,7 +351,7 @@ const ResumeForm: React.FC<ResumeFormProps> = ({
                                       )
                                     },
                                     {
-                                      key: "projects.from.month",
+                                      key: 'projects.from.month',
                                       value: (
                                         <Field
                                           component={SelectLabel}
@@ -377,15 +371,15 @@ const ResumeForm: React.FC<ResumeFormProps> = ({
                                   ]}
                                 />
                               ),
-                              key: "projects.from",
-                              term: "開始"
+                              key: 'projects.from',
+                              term: '開始'
                             },
                             {
                               description: (
                                 <LabeledRadioFieldList
                                   fields={[
                                     {
-                                      key: "projects.to.year",
+                                      key: 'projects.to.year',
                                       value: (
                                         <Field
                                           component={SelectLabel}
@@ -408,7 +402,7 @@ const ResumeForm: React.FC<ResumeFormProps> = ({
                                       )
                                     },
                                     {
-                                      key: "projects.to.month",
+                                      key: 'projects.to.month',
                                       value: (
                                         <Field
                                           component={SelectLabel}
@@ -428,8 +422,8 @@ const ResumeForm: React.FC<ResumeFormProps> = ({
                                   ]}
                                 />
                               ),
-                              key: "projects.to",
-                              term: "終了"
+                              key: 'projects.to',
+                              term: '終了'
                             },
                             {
                               description: (
@@ -439,8 +433,8 @@ const ResumeForm: React.FC<ResumeFormProps> = ({
                                   placeholder={`プロジェクト${index + 1}`}
                                 />
                               ),
-                              key: "projects.title",
-                              term: "プロジェクト名"
+                              key: 'projects.title',
+                              term: 'プロジェクト名'
                             },
                             {
                               description: (
@@ -449,8 +443,8 @@ const ResumeForm: React.FC<ResumeFormProps> = ({
                                   name={`projects.${index}.content`}
                                 />
                               ),
-                              key: "projects.content",
-                              term: "業務内容"
+                              key: 'projects.content',
+                              term: '業務内容'
                             },
                             {
                               description: (
@@ -460,8 +454,8 @@ const ResumeForm: React.FC<ResumeFormProps> = ({
                                   placeholder="PG"
                                 />
                               ),
-                              key: "projects.role",
-                              term: "役割"
+                              key: 'projects.role',
+                              term: '役割'
                             },
                             {
                               description: (
@@ -476,8 +470,8 @@ const ResumeForm: React.FC<ResumeFormProps> = ({
                                   名
                                 </React.Fragment>
                               ),
-                              key: "projects.team",
-                              term: "規模"
+                              key: 'projects.team',
+                              term: '規模'
                             },
                             {
                               description: (
@@ -536,8 +530,8 @@ const ResumeForm: React.FC<ResumeFormProps> = ({
                                   }}
                                 />
                               ),
-                              key: "projects.languageList",
-                              term: "使用言語"
+                              key: 'projects.languageList',
+                              term: '使用言語'
                             }
                           ]}
                           key="fieldList"
@@ -598,7 +592,7 @@ export default withFormik<OuterProps, Values>({
         .year(year)
         .month(month)
         .date(date)
-        .startOf("date"),
+        .startOf('date'),
       projects: projects.map(
         ({
           from: { month: fromMonth, year: fromYear },
@@ -609,11 +603,11 @@ export default withFormik<OuterProps, Values>({
           from: moment()
             .year(fromYear)
             .month(fromMonth)
-            .startOf("month"),
+            .startOf('month'),
           to: moment()
             .year(toYear)
             .month(toMonth)
-            .startOf("month")
+            .startOf('month')
         })
       )
     });

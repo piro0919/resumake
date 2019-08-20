@@ -14,22 +14,22 @@ const Pages: React.FC<PagesProps> = ({
   clientSize: { clientHeight, clientWidth }
 }) => {
   const initialValue = React.useMemo<
-    ArgumentTypes<ResumeFormProps["handleSubmit2"]>[0]
+    ArgumentTypes<ResumeFormProps['handleSubmit2']>[0]
   >(
     () => ({
-      belongs: "",
-      birthday: moment().startOf("date"),
-      education: "",
-      engineerCode: "",
-      expertise: "",
-      nearestStation: "",
+      belongs: '',
+      birthday: moment().startOf('date'),
+      education: '',
+      engineerCode: '',
+      expertise: '',
+      nearestStation: '',
       projects: [
         {
-          content: "",
-          dbList: [""],
-          from: moment().startOf("month"),
-          fwMwToolList: [""],
-          languageList: [""],
+          content: '',
+          dbList: [''],
+          from: moment().startOf('month'),
+          fwMwToolList: [''],
+          languageList: [''],
           process: {
             requirementDefinition: false,
             basicDesign: false,
@@ -39,27 +39,27 @@ const Pages: React.FC<PagesProps> = ({
             comprehensiveTest: false,
             maintenanceAndOperation: false
           },
-          role: "",
-          serverOsList: [""],
+          role: '',
+          serverOsList: [''],
           team: 0,
-          title: "",
-          to: moment().startOf("month")
+          title: '',
+          to: moment().startOf('month')
         }
       ],
-      qualification: "",
-      selfIntroduction: "",
-      sex: "man",
-      specialty: "",
-      specialtyBusiness: ""
+      qualification: '',
+      selfIntroduction: '',
+      sex: 'man',
+      specialty: '',
+      specialtyBusiness: ''
     }),
     []
   );
 
-  const [values, setValues] = React.useState<ResumeIframeProps["values"]>(
+  const [values, setValues] = React.useState<ResumeIframeProps['values']>(
     initialValue
   );
 
-  const handleSubmit = React.useCallback<ResumeFormProps["handleSubmit2"]>(
+  const handleSubmit = React.useCallback<ResumeFormProps['handleSubmit2']>(
     values => {
       setValues(values);
     },

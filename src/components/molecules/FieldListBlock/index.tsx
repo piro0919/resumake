@@ -9,7 +9,7 @@ const FieldListBlock: React.FC = ({ children }) => {
         footer?: React.ReactNode;
       }>((previousValue, currentValue) => {
         const { key } = currentValue as {
-          key: "fieldList" | "footer";
+          key: 'fieldList' | 'footer';
           [key: string]: any;
         };
 
