@@ -95,549 +95,497 @@ const ResumeForm: React.FC<ResumeFormProps> = ({
     birthday: { month, year },
     projects
   }
-}) => (
-  <Form>
-    <SectionList>
-      {[
-        <Section heading="個人情報" key="個人情報">
-          <FieldList
-            fields={[
-              {
-                description: (
-                  <Field
-                    component={Input}
-                    name="engineerCode"
-                    onBlur={handleSubmit}
-                    placeholder="ENG0123456789"
-                  />
-                ),
-                key: "engineerCode",
-                term: "技術者コード"
-              },
-              {
-                description: (
-                  <Field
-                    component={Input}
-                    name="belongs"
-                    onBlur={handleSubmit}
-                    placeholder="個人事業主"
-                  />
-                ),
-                key: "belongs",
-                term: "所属"
-              },
-              {
-                description: (
-                  <LabeledRadioFieldList
-                    fields={[
-                      {
-                        key: "birthday.year",
-                        value: (
-                          <Field
-                            component={SelectLabel}
-                            label="年"
-                            name="birthday.year"
-                          >
-                            {Array.from(Array(100).keys())
-                              .reverse()
-                              .map(value => (
-                                <option
-                                  key={value}
-                                  onClick={() => {
-                                    setTimeout(() => {
-                                      handleSubmit();
-                                    }, 1000);
-                                  }}
-                                  value={moment().year() - value}
-                                >
-                                  {moment().year() - value}
+}) => {
+  React.useEffect(() => {
+    handleSubmit();
+
+    const timer = setInterval(() => {
+      handleSubmit();
+    }, 5000);
+
+    return () => {
+      clearInterval(timer);
+    };
+  }, [handleSubmit]);
+
+  return (
+    <Form>
+      <SectionList>
+        {[
+          <Section heading="個人情報" key="個人情報">
+            <FieldList
+              fields={[
+                {
+                  description: (
+                    <Field
+                      component={Input}
+                      name="engineerCode"
+                      placeholder="ENG0123456789"
+                    />
+                  ),
+                  key: "engineerCode",
+                  term: "技術者コード"
+                },
+                {
+                  description: (
+                    <Field
+                      component={Input}
+                      name="belongs"
+                      placeholder="個人事業主"
+                    />
+                  ),
+                  key: "belongs",
+                  term: "所属"
+                },
+                {
+                  description: (
+                    <LabeledRadioFieldList
+                      fields={[
+                        {
+                          key: "birthday.year",
+                          value: (
+                            <Field
+                              component={SelectLabel}
+                              label="年"
+                              name="birthday.year"
+                            >
+                              {Array.from(Array(100).keys())
+                                .reverse()
+                                .map(value => (
+                                  <option
+                                    key={value}
+                                    value={moment().year() - value}
+                                  >
+                                    {moment().year() - value}
+                                  </option>
+                                ))}
+                            </Field>
+                          )
+                        },
+                        {
+                          key: "birthday.month",
+                          value: (
+                            <Field
+                              component={SelectLabel}
+                              label="月"
+                              name="birthday.month"
+                            >
+                              {moment.months().map((month, index) => (
+                                <option key={month} value={index}>
+                                  {index + 1}
                                 </option>
                               ))}
-                          </Field>
-                        )
-                      },
-                      {
-                        key: "birthday.month",
-                        value: (
-                          <Field
-                            component={SelectLabel}
-                            label="月"
-                            name="birthday.month"
-                          >
-                            {moment.months().map((month, index) => (
-                              <option
-                                key={month}
-                                onClick={() => {
-                                  setTimeout(() => {
-                                    handleSubmit();
-                                  }, 1000);
-                                }}
-                                value={index}
-                              >
-                                {index + 1}
-                              </option>
-                            ))}
-                          </Field>
-                        )
-                      },
-                      {
-                        key: "birthday.date",
-                        value: (
-                          <Field
-                            component={SelectLabel}
-                            label="日"
-                            name="birthday.date"
-                          >
-                            {Array.from(
-                              Array(
-                                moment()
-                                  .year(year)
-                                  .month(month)
-                                  .endOf("month")
-                                  .date()
-                              ).keys()
-                            ).map(value => (
-                              <option
-                                key={value}
-                                onClick={() => {
-                                  setTimeout(() => {
-                                    handleSubmit();
-                                  }, 1000);
-                                }}
-                                value={value + 1}
-                              >
-                                {value + 1}
-                              </option>
-                            ))}
-                          </Field>
-                        )
-                      }
-                    ]}
-                  />
-                ),
-                key: "birthday",
-                term: "生年月日"
-              },
-              {
-                description: (
-                  <LabeledRadioFieldList
-                    fields={[
-                      {
-                        key: "man",
-                        value: (
-                          <Field
-                            component={RadioLabel}
-                            id="man"
-                            label="男性"
-                            name="sex"
-                            onClick={() => {
-                              setTimeout(() => {
-                                handleSubmit();
-                              }, 1000);
-                            }}
-                          />
-                        )
-                      },
-                      {
-                        key: "woman",
-                        value: (
-                          <Field
-                            component={RadioLabel}
-                            id="woman"
-                            label="女性"
-                            name="sex"
-                            onClick={() => {
-                              setTimeout(() => {
-                                handleSubmit();
-                              }, 1000);
-                            }}
-                          />
-                        )
-                      }
-                    ]}
-                  />
-                ),
-                key: "sex",
-                term: "性別"
-              },
-              {
-                description: (
-                  <Field
-                    component={Input}
-                    name="qualification"
-                    onBlur={handleSubmit}
-                    placeholder="基本情報技術者"
-                  />
-                ),
-                key: "qualification",
-                term: "資格"
-              },
-              {
-                description: (
-                  <Field
-                    component={Input}
-                    name="education"
-                    onBlur={handleSubmit}
-                    placeholder="東京大学 理学部 情報科学科 卒業"
-                  />
-                ),
-                key: "education",
-                term: "学歴"
-              },
-              {
-                description: (
-                  <Field
-                    component={Input}
-                    name="nearestStation"
-                    onBlur={handleSubmit}
-                    placeholder="山手線 新宿駅"
-                  />
-                ),
-                key: "nearestStation",
-                term: "最寄り駅"
-              }
-            ]}
-          />
-        </Section>,
-        <Section heading="得意なこと" key="得意なこと">
-          <FieldList
-            fields={[
-              {
-                description: (
-                  <Field
-                    component={Input}
-                    name="specialty"
-                    onBlur={handleSubmit}
-                    placeholder="実装"
-                  />
-                ),
-                key: "specialty",
-                term: "得意分野"
-              },
-              {
-                description: (
-                  <Field
-                    component={Input}
-                    name="expertise"
-                    onBlur={handleSubmit}
-                    placeholder="HTML, CSS, JavaScript"
-                  />
-                ),
-                key: "expertise",
-                term: "得意技術"
-              },
-              {
-                description: (
-                  <Field
-                    component={Input}
-                    name="specialtyBusiness"
-                    onBlur={handleSubmit}
-                    placeholder="Webサービス開発"
-                  />
-                ),
-                key: "specialtyBusiness",
-                term: "得意業務"
-              }
-            ]}
-          />
-        </Section>,
-        <Section heading="自己PR" key="自己PR">
-          <Field
-            component={Textarea}
-            name="selfIntroduction"
-            onBlur={handleSubmit}
-          />
-        </Section>,
-        <Section heading="経歴" key="経歴">
-          <FieldArray
-            name="projects"
-            render={({ push, remove }) => (
-              <ProjectListBlock
-                projects={projects.map((_, index) => ({
-                  key: `projects.${index}`,
-                  node: (
-                    <FieldListBlock>
-                      <FieldList
-                        fields={[
-                          {
-                            description: (
-                              <LabeledRadioFieldList
-                                fields={[
-                                  {
-                                    key: "projects.from.year",
-                                    value: (
-                                      <Field
-                                        component={SelectLabel}
-                                        label="年"
-                                        name={`projects.${index}.from.year`}
-                                      >
-                                        {Array.from(Array(50).keys())
-                                          .reverse()
-                                          .map(value => (
-                                            <option
-                                              key={value}
-                                              onClick={() => {
-                                                setTimeout(() => {
-                                                  handleSubmit();
-                                                }, 1000);
-                                              }}
-                                              value={
-                                                moment().year() - value + 5
-                                              }
-                                            >
-                                              {moment().year() - value + 5}
-                                            </option>
-                                          ))}
-                                      </Field>
-                                    )
-                                  },
-                                  {
-                                    key: "projects.from.month",
-                                    value: (
-                                      <Field
-                                        component={SelectLabel}
-                                        label="月"
-                                        name={`projects.${index}.from.month`}
-                                      >
-                                        {moment.months().map((month, index) => (
-                                          <option
-                                            key={month}
-                                            onClick={() => {
-                                              setTimeout(() => {
-                                                handleSubmit();
-                                              }, 1000);
-                                            }}
-                                            value={index}
-                                          >
-                                            {index + 1}
-                                          </option>
-                                        ))}
-                                      </Field>
-                                    )
-                                  }
-                                ]}
-                              />
-                            ),
-                            key: "projects.from",
-                            term: "開始"
-                          },
-                          {
-                            description: (
-                              <LabeledRadioFieldList
-                                fields={[
-                                  {
-                                    key: "projects.to.year",
-                                    value: (
-                                      <Field
-                                        component={SelectLabel}
-                                        label="年"
-                                        name={`projects.${index}.to.year`}
-                                      >
-                                        {Array.from(Array(50).keys())
-                                          .reverse()
-                                          .map(value => (
-                                            <option
-                                              key={value}
-                                              onClick={() => {
-                                                setTimeout(() => {
-                                                  handleSubmit();
-                                                }, 1000);
-                                              }}
-                                              value={
-                                                moment().year() - value + 5
-                                              }
-                                            >
-                                              {moment().year() - value + 5}
-                                            </option>
-                                          ))}
-                                      </Field>
-                                    )
-                                  },
-                                  {
-                                    key: "projects.to.month",
-                                    value: (
-                                      <Field
-                                        component={SelectLabel}
-                                        label="月"
-                                        name={`projects.${index}.to.month`}
-                                      >
-                                        {moment.months().map((month, index) => (
-                                          <option
-                                            key={month}
-                                            onClick={() => {
-                                              setTimeout(() => {
-                                                handleSubmit();
-                                              }, 1000);
-                                            }}
-                                            value={index}
-                                          >
-                                            {index + 1}
-                                          </option>
-                                        ))}
-                                      </Field>
-                                    )
-                                  }
-                                ]}
-                              />
-                            ),
-                            key: "projects.to",
-                            term: "終了"
-                          },
-                          {
-                            description: (
-                              <Field
-                                component={Input}
-                                name={`projects.${index}.title`}
-                                onBlur={handleSubmit}
-                                placeholder={`プロジェクト${index + 1}`}
-                              />
-                            ),
-                            key: "projects.title",
-                            term: "プロジェクト名"
-                          },
-                          {
-                            description: (
-                              <Field
-                                component={Textarea}
-                                name={`projects.${index}.content`}
-                                onBlur={handleSubmit}
-                              />
-                            ),
-                            key: "projects.content",
-                            term: "業務内容"
-                          },
-                          {
-                            description: (
-                              <Field
-                                component={Input}
-                                name={`projects.${index}.role`}
-                                onBlur={handleSubmit}
-                                placeholder="PG"
-                              />
-                            ),
-                            key: "projects.role",
-                            term: "役割"
-                          },
-                          {
-                            description: (
-                              <React.Fragment>
+                            </Field>
+                          )
+                        },
+                        {
+                          key: "birthday.date",
+                          value: (
+                            <Field
+                              component={SelectLabel}
+                              label="日"
+                              name="birthday.date"
+                            >
+                              {Array.from(
+                                Array(
+                                  moment()
+                                    .year(year)
+                                    .month(month)
+                                    .endOf("month")
+                                    .date()
+                                ).keys()
+                              ).map(value => (
+                                <option key={value} value={value + 1}>
+                                  {value + 1}
+                                </option>
+                              ))}
+                            </Field>
+                          )
+                        }
+                      ]}
+                    />
+                  ),
+                  key: "birthday",
+                  term: "生年月日"
+                },
+                {
+                  description: (
+                    <LabeledRadioFieldList
+                      fields={[
+                        {
+                          key: "man",
+                          value: (
+                            <Field
+                              component={RadioLabel}
+                              id="man"
+                              label="男性"
+                              name="sex"
+                            />
+                          )
+                        },
+                        {
+                          key: "woman",
+                          value: (
+                            <Field
+                              component={RadioLabel}
+                              id="woman"
+                              label="女性"
+                              name="sex"
+                            />
+                          )
+                        }
+                      ]}
+                    />
+                  ),
+                  key: "sex",
+                  term: "性別"
+                },
+                {
+                  description: (
+                    <Field
+                      component={Input}
+                      name="qualification"
+                      placeholder="基本情報技術者"
+                    />
+                  ),
+                  key: "qualification",
+                  term: "資格"
+                },
+                {
+                  description: (
+                    <Field
+                      component={Input}
+                      name="education"
+                      placeholder="東京大学 理学部 情報科学科 卒業"
+                    />
+                  ),
+                  key: "education",
+                  term: "学歴"
+                },
+                {
+                  description: (
+                    <Field
+                      component={Input}
+                      name="nearestStation"
+                      placeholder="山手線 新宿駅"
+                    />
+                  ),
+                  key: "nearestStation",
+                  term: "最寄り駅"
+                }
+              ]}
+            />
+          </Section>,
+          <Section heading="得意なこと" key="得意なこと">
+            <FieldList
+              fields={[
+                {
+                  description: (
+                    <Field
+                      component={Input}
+                      name="specialty"
+                      placeholder="実装"
+                    />
+                  ),
+                  key: "specialty",
+                  term: "得意分野"
+                },
+                {
+                  description: (
+                    <Field
+                      component={Input}
+                      name="expertise"
+                      placeholder="HTML, CSS, JavaScript"
+                    />
+                  ),
+                  key: "expertise",
+                  term: "得意技術"
+                },
+                {
+                  description: (
+                    <Field
+                      component={Input}
+                      name="specialtyBusiness"
+                      placeholder="Webサービス開発"
+                    />
+                  ),
+                  key: "specialtyBusiness",
+                  term: "得意業務"
+                }
+              ]}
+            />
+          </Section>,
+          <Section heading="自己PR" key="自己PR">
+            <Field component={Textarea} name="selfIntroduction" />
+          </Section>,
+          <Section heading="経歴" key="経歴">
+            <FieldArray
+              name="projects"
+              render={({ push, remove }) => (
+                <ProjectListBlock
+                  projects={projects.map((_, index) => ({
+                    key: `projects.${index}`,
+                    node: (
+                      <FieldListBlock>
+                        <FieldList
+                          fields={[
+                            {
+                              description: (
+                                <LabeledRadioFieldList
+                                  fields={[
+                                    {
+                                      key: "projects.from.year",
+                                      value: (
+                                        <Field
+                                          component={SelectLabel}
+                                          label="年"
+                                          name={`projects.${index}.from.year`}
+                                        >
+                                          {Array.from(Array(50).keys())
+                                            .reverse()
+                                            .map(value => (
+                                              <option
+                                                key={value}
+                                                value={
+                                                  moment().year() - value + 5
+                                                }
+                                              >
+                                                {moment().year() - value + 5}
+                                              </option>
+                                            ))}
+                                        </Field>
+                                      )
+                                    },
+                                    {
+                                      key: "projects.from.month",
+                                      value: (
+                                        <Field
+                                          component={SelectLabel}
+                                          label="月"
+                                          name={`projects.${index}.from.month`}
+                                        >
+                                          {moment
+                                            .months()
+                                            .map((month, index) => (
+                                              <option key={month} value={index}>
+                                                {index + 1}
+                                              </option>
+                                            ))}
+                                        </Field>
+                                      )
+                                    }
+                                  ]}
+                                />
+                              ),
+                              key: "projects.from",
+                              term: "開始"
+                            },
+                            {
+                              description: (
+                                <LabeledRadioFieldList
+                                  fields={[
+                                    {
+                                      key: "projects.to.year",
+                                      value: (
+                                        <Field
+                                          component={SelectLabel}
+                                          label="年"
+                                          name={`projects.${index}.to.year`}
+                                        >
+                                          {Array.from(Array(50).keys())
+                                            .reverse()
+                                            .map(value => (
+                                              <option
+                                                key={value}
+                                                value={
+                                                  moment().year() - value + 5
+                                                }
+                                              >
+                                                {moment().year() - value + 5}
+                                              </option>
+                                            ))}
+                                        </Field>
+                                      )
+                                    },
+                                    {
+                                      key: "projects.to.month",
+                                      value: (
+                                        <Field
+                                          component={SelectLabel}
+                                          label="月"
+                                          name={`projects.${index}.to.month`}
+                                        >
+                                          {moment
+                                            .months()
+                                            .map((month, index) => (
+                                              <option key={month} value={index}>
+                                                {index + 1}
+                                              </option>
+                                            ))}
+                                        </Field>
+                                      )
+                                    }
+                                  ]}
+                                />
+                              ),
+                              key: "projects.to",
+                              term: "終了"
+                            },
+                            {
+                              description: (
                                 <Field
                                   component={Input}
-                                  min={0}
-                                  name={`projects.${index}.team`}
-                                  onBlur={handleSubmit}
-                                  placeholder="0"
-                                  type="number"
+                                  name={`projects.${index}.title`}
+                                  placeholder={`プロジェクト${index + 1}`}
                                 />
-                                名
-                              </React.Fragment>
-                            ),
-                            key: "projects.team",
-                            term: "規模"
-                          },
-                          {
-                            description: (
-                              <FieldArray
-                                name={`projects.${index}.languageList`}
-                                render={({ push, remove }) => {
-                                  const { languageList } = projects[index];
+                              ),
+                              key: "projects.title",
+                              term: "プロジェクト名"
+                            },
+                            {
+                              description: (
+                                <Field
+                                  component={Textarea}
+                                  name={`projects.${index}.content`}
+                                />
+                              ),
+                              key: "projects.content",
+                              term: "業務内容"
+                            },
+                            {
+                              description: (
+                                <Field
+                                  component={Input}
+                                  name={`projects.${index}.role`}
+                                  placeholder="PG"
+                                />
+                              ),
+                              key: "projects.role",
+                              term: "役割"
+                            },
+                            {
+                              description: (
+                                <React.Fragment>
+                                  <Field
+                                    component={Input}
+                                    min={0}
+                                    name={`projects.${index}.team`}
+                                    placeholder="0"
+                                    type="number"
+                                  />
+                                  名
+                                </React.Fragment>
+                              ),
+                              key: "projects.team",
+                              term: "規模"
+                            },
+                            {
+                              description: (
+                                <FieldArray
+                                  name={`projects.${index}.languageList`}
+                                  render={({ push, remove }) => {
+                                    const { languageList } = projects[index];
 
-                                  return (
-                                    <SmallFieldListBlock
-                                      fields={languageList.map((_, index2) => ({
-                                        key: `projects.${index}.languageList.${index2}`,
-                                        value: (
-                                          <FieldWithIconBlock>
-                                            <Field
-                                              component={Input}
-                                              key="field"
-                                              name={`projects.${index}.languageList.${index2}`}
-                                              onBlur={handleSubmit}
-                                              placeholder="HTML"
-                                            />
-                                            <button
-                                              key="icon"
-                                              onClick={() => {
-                                                remove(index2);
-                                              }}
-                                              style={{ height: 20 }}
-                                            >
-                                              <Icon iconType={FiMinusSquare} />
-                                            </button>
-                                          </FieldWithIconBlock>
-                                        )
-                                      }))}
-                                      footer={
-                                        <button
-                                          onClick={() => {
-                                            push("");
-                                          }}
-                                          style={{ height: 20 }}
-                                        >
-                                          <Icon iconType={FiPlusSquare} />
-                                        </button>
-                                      }
-                                    />
-                                  );
-                                }}
-                              />
-                            ),
-                            key: "projects.languageList",
-                            term: "使用言語"
-                          }
-                        ]}
-                        key="fieldList"
-                      />
-                      <Button
-                        key="footer"
-                        onClick={() => {
-                          remove(index);
+                                    return (
+                                      <SmallFieldListBlock
+                                        fields={languageList.map(
+                                          (_, index2) => ({
+                                            key: `projects.${index}.languageList.${index2}`,
+                                            value: (
+                                              <FieldWithIconBlock>
+                                                <Field
+                                                  component={Input}
+                                                  key="field"
+                                                  name={`projects.${index}.languageList.${index2}`}
+                                                  placeholder="HTML"
+                                                />
+                                                <button
+                                                  key="icon"
+                                                  onClick={() => {
+                                                    remove(index2);
+                                                  }}
+                                                  style={{ height: 20 }}
+                                                  type="button"
+                                                >
+                                                  <Icon
+                                                    iconType={FiMinusSquare}
+                                                  />
+                                                </button>
+                                              </FieldWithIconBlock>
+                                            )
+                                          })
+                                        )}
+                                        footer={
+                                          <button
+                                            onClick={() => {
+                                              const { projects } = initialValue;
+                                              const {
+                                                languageList
+                                              } = projects[0];
 
-                          // 強引
-                          setTimeout(() => {
-                            handleSubmit();
-                          }, 1000);
-                        }}
-                        type="button"
-                      >
-                        削除
-                      </Button>
-                    </FieldListBlock>
-                  )
-                }))}
-                footer={
-                  <Button
-                    onClick={() => {
-                      const { projects } = initialValue;
+                                              push(languageList[0]);
+                                            }}
+                                            style={{ height: 20 }}
+                                            type="button"
+                                          >
+                                            <Icon iconType={FiPlusSquare} />
+                                          </button>
+                                        }
+                                      />
+                                    );
+                                  }}
+                                />
+                              ),
+                              key: "projects.languageList",
+                              term: "使用言語"
+                            }
+                          ]}
+                          key="fieldList"
+                        />
+                        <Button
+                          key="footer"
+                          onClick={() => {
+                            remove(index);
+                          }}
+                          type="button"
+                        >
+                          削除
+                        </Button>
+                      </FieldListBlock>
+                    )
+                  }))}
+                  footer={
+                    <Button
+                      onClick={() => {
+                        const { projects } = initialValue;
 
-                      push(
-                        projects.map(({ from, to, ...projects }) => ({
-                          ...projects,
-                          from: {
-                            month: from.month(),
-                            year: from.year()
-                          },
-                          to: {
-                            month: to.month(),
-                            year: to.year()
-                          }
-                        }))[0]
-                      );
-                    }}
-                    type="submit"
-                  >
-                    追加
-                  </Button>
-                }
-              />
-            )}
-          />
-        </Section>
-      ]}
-    </SectionList>
-    <Button type="submit">更新</Button>
-  </Form>
-);
+                        push(
+                          projects.map(({ from, to, ...projects }) => ({
+                            ...projects,
+                            from: {
+                              month: from.month(),
+                              year: from.year()
+                            },
+                            to: {
+                              month: to.month(),
+                              year: to.year()
+                            }
+                          }))[0]
+                        );
+                      }}
+                    >
+                      追加
+                    </Button>
+                  }
+                />
+              )}
+            />
+          </Section>
+        ]}
+      </SectionList>
+    </Form>
+  );
+};
 
 export default withFormik<OuterProps, Values>({
   handleSubmit: (
@@ -649,7 +597,8 @@ export default withFormik<OuterProps, Values>({
       birthday: moment()
         .year(year)
         .month(month)
-        .date(date),
+        .date(date)
+        .startOf("date"),
       projects: projects.map(
         ({
           from: { month: fromMonth, year: fromYear },
@@ -659,10 +608,12 @@ export default withFormik<OuterProps, Values>({
           ...project,
           from: moment()
             .year(fromYear)
-            .month(fromMonth),
+            .month(fromMonth)
+            .startOf("month"),
           to: moment()
             .year(toYear)
             .month(toMonth)
+            .startOf("month")
         })
       )
     });

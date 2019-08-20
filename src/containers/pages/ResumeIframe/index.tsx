@@ -46,6 +46,8 @@ export interface ResumeIframeProps {
 const ResumeIframe: React.FC<ResumeIframeProps> = ({ values }) => {
   const [url, setUrl] = React.useState("");
 
+  const ref = React.useRef(values);
+
   React.useEffect(() => {
     pdfMake.fonts = {
       ipam: {
@@ -59,6 +61,10 @@ const ResumeIframe: React.FC<ResumeIframeProps> = ({ values }) => {
   }, []);
 
   React.useEffect(() => {
+    if (JSON.stringify(ref.current) === JSON.stringify(values)) {
+      return;
+    }
+
     const {
       belongs,
       birthday,
@@ -377,7 +383,11 @@ const ResumeIframe: React.FC<ResumeIframeProps> = ({ values }) => {
       .getDataUrl(result => {
         setUrl(result);
       });
-  }, [setUrl, values]);
+  }, [ref, setUrl, values]);
+
+  React.useEffect(() => {
+    ref.current = values;
+  }, [ref, values]);
 
   return (
     <iframe

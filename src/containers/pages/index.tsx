@@ -18,7 +18,7 @@ const Pages: React.FC<PagesProps> = ({
   >(
     () => ({
       belongs: "",
-      birthday: moment(),
+      birthday: moment().startOf("date"),
       education: "",
       engineerCode: "",
       expertise: "",
@@ -27,7 +27,7 @@ const Pages: React.FC<PagesProps> = ({
         {
           content: "",
           dbList: [""],
-          from: moment(),
+          from: moment().startOf("month"),
           fwMwToolList: [""],
           languageList: [""],
           process: {
@@ -43,7 +43,7 @@ const Pages: React.FC<PagesProps> = ({
           serverOsList: [""],
           team: 0,
           title: "",
-          to: moment()
+          to: moment().startOf("month")
         }
       ],
       qualification: "",
