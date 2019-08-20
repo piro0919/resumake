@@ -1,13 +1,17 @@
 import Input from './Input';
 import RadioLabel from './RadioLabel';
+import SelectLabel from './SelectLabel';
 import Textarea from './Textarea';
 import Button from 'components/atoms/Button';
+import Icon from 'components/atoms/Icon';
 import Section from 'components/atoms/Section';
 import FieldList from 'components/molecules/FieldList';
 import FieldListBlock from 'components/molecules/FieldListBlock';
+import FieldWithIconBlock from 'components/molecules/FieldWithIconBlock';
 import LabeledRadioFieldList from 'components/molecules/LabeledRadioFieldList';
 import ProjectListBlock from 'components/molecules/ProjectListBlock';
 import SectionList from 'components/molecules/SectionList';
+import SmallFieldListBlock from 'components/molecules/SmallFieldListBlock';
 import {
   Field,
   FieldArray,
@@ -15,13 +19,17 @@ import {
   FormikProps,
   withFormik
   } from 'formik';
-import moment from 'moment';
+import moment, { Moment } from 'moment';
 import React from 'react';
+import { FiMinusSquare, FiPlusSquare } from 'react-icons/fi';
 
 interface Project {
   content: string;
   dbList: string[];
-  from: any;
+  from: {
+    month: number;
+    year: number;
+  };
   fwMwToolList: string[];
   languageList: string[];
   pageBreakAfter?: boolean;
@@ -38,7 +46,10 @@ interface Project {
   serverOsList: string[];
   team: number;
   title: string;
-  to: any;
+  to: {
+    month: number;
+    year: number;
+  };
 }
 
 interface Values {
@@ -60,16 +71,30 @@ interface Values {
   specialtyBusiness: string;
 }
 
+interface SubmitValuesProject extends Omit<Project, "from" | "to"> {
+  from: Moment;
+  to: Moment;
+}
+
+interface SubmitValues extends Omit<Values, "birthday" | "projects"> {
+  birthday: Moment;
+  projects: SubmitValuesProject[];
+}
+
 interface OuterProps {
-  handleSubmit2: (values: Values) => void;
-  initialValue: Values;
+  handleSubmit2: (values: SubmitValues) => void;
+  initialValue: SubmitValues;
 }
 
 export type ResumeFormProps = FormikProps<Values> & OuterProps;
 
 const ResumeForm: React.FC<ResumeFormProps> = ({
   handleSubmit,
-  values: { projects }
+  initialValue,
+  values: {
+    birthday: { month, year },
+    projects
+  }
 }) => (
   <Form>
     <SectionList>
@@ -103,15 +128,94 @@ const ResumeForm: React.FC<ResumeFormProps> = ({
               },
               {
                 description: (
-                  <Field component="select" name="age">
-                    {moment.months().map((month, index) => (
-                      <option key={month} value={index + 1}>
-                        {index + 1}
-                      </option>
-                    ))}
-                  </Field>
+                  <LabeledRadioFieldList
+                    fields={[
+                      {
+                        key: "birthday.year",
+                        value: (
+                          <Field
+                            component={SelectLabel}
+                            label="年"
+                            name="birthday.year"
+                          >
+                            {Array.from(Array(100).keys())
+                              .reverse()
+                              .map(value => (
+                                <option
+                                  key={value}
+                                  onClick={() => {
+                                    setTimeout(() => {
+                                      handleSubmit();
+                                    }, 1000);
+                                  }}
+                                  value={moment().year() - value}
+                                >
+                                  {moment().year() - value}
+                                </option>
+                              ))}
+                          </Field>
+                        )
+                      },
+                      {
+                        key: "birthday.month",
+                        value: (
+                          <Field
+                            component={SelectLabel}
+                            label="月"
+                            name="birthday.month"
+                          >
+                            {moment.months().map((month, index) => (
+                              <option
+                                key={month}
+                                onClick={() => {
+                                  setTimeout(() => {
+                                    handleSubmit();
+                                  }, 1000);
+                                }}
+                                value={index}
+                              >
+                                {index + 1}
+                              </option>
+                            ))}
+                          </Field>
+                        )
+                      },
+                      {
+                        key: "birthday.date",
+                        value: (
+                          <Field
+                            component={SelectLabel}
+                            label="日"
+                            name="birthday.date"
+                          >
+                            {Array.from(
+                              Array(
+                                moment()
+                                  .year(year)
+                                  .month(month)
+                                  .endOf("month")
+                                  .date()
+                              ).keys()
+                            ).map(value => (
+                              <option
+                                key={value}
+                                onClick={() => {
+                                  setTimeout(() => {
+                                    handleSubmit();
+                                  }, 1000);
+                                }}
+                                value={value + 1}
+                              >
+                                {value + 1}
+                              </option>
+                            ))}
+                          </Field>
+                        )
+                      }
+                    ]}
+                  />
                 ),
-                key: "age",
+                key: "birthday",
                 term: "生年月日"
               },
               {
@@ -257,6 +361,130 @@ const ResumeForm: React.FC<ResumeFormProps> = ({
                         fields={[
                           {
                             description: (
+                              <LabeledRadioFieldList
+                                fields={[
+                                  {
+                                    key: "projects.from.year",
+                                    value: (
+                                      <Field
+                                        component={SelectLabel}
+                                        label="年"
+                                        name={`projects.${index}.from.year`}
+                                      >
+                                        {Array.from(Array(50).keys())
+                                          .reverse()
+                                          .map(value => (
+                                            <option
+                                              key={value}
+                                              onClick={() => {
+                                                setTimeout(() => {
+                                                  handleSubmit();
+                                                }, 1000);
+                                              }}
+                                              value={
+                                                moment().year() - value + 5
+                                              }
+                                            >
+                                              {moment().year() - value + 5}
+                                            </option>
+                                          ))}
+                                      </Field>
+                                    )
+                                  },
+                                  {
+                                    key: "projects.from.month",
+                                    value: (
+                                      <Field
+                                        component={SelectLabel}
+                                        label="月"
+                                        name={`projects.${index}.from.month`}
+                                      >
+                                        {moment.months().map((month, index) => (
+                                          <option
+                                            key={month}
+                                            onClick={() => {
+                                              setTimeout(() => {
+                                                handleSubmit();
+                                              }, 1000);
+                                            }}
+                                            value={index}
+                                          >
+                                            {index + 1}
+                                          </option>
+                                        ))}
+                                      </Field>
+                                    )
+                                  }
+                                ]}
+                              />
+                            ),
+                            key: "projects.from",
+                            term: "開始"
+                          },
+                          {
+                            description: (
+                              <LabeledRadioFieldList
+                                fields={[
+                                  {
+                                    key: "projects.to.year",
+                                    value: (
+                                      <Field
+                                        component={SelectLabel}
+                                        label="年"
+                                        name={`projects.${index}.to.year`}
+                                      >
+                                        {Array.from(Array(50).keys())
+                                          .reverse()
+                                          .map(value => (
+                                            <option
+                                              key={value}
+                                              onClick={() => {
+                                                setTimeout(() => {
+                                                  handleSubmit();
+                                                }, 1000);
+                                              }}
+                                              value={
+                                                moment().year() - value + 5
+                                              }
+                                            >
+                                              {moment().year() - value + 5}
+                                            </option>
+                                          ))}
+                                      </Field>
+                                    )
+                                  },
+                                  {
+                                    key: "projects.to.month",
+                                    value: (
+                                      <Field
+                                        component={SelectLabel}
+                                        label="月"
+                                        name={`projects.${index}.to.month`}
+                                      >
+                                        {moment.months().map((month, index) => (
+                                          <option
+                                            key={month}
+                                            onClick={() => {
+                                              setTimeout(() => {
+                                                handleSubmit();
+                                              }, 1000);
+                                            }}
+                                            value={index}
+                                          >
+                                            {index + 1}
+                                          </option>
+                                        ))}
+                                      </Field>
+                                    )
+                                  }
+                                ]}
+                              />
+                            ),
+                            key: "projects.to",
+                            term: "終了"
+                          },
+                          {
+                            description: (
                               <Field
                                 component={Input}
                                 name={`projects.${index}.title`}
@@ -264,7 +492,7 @@ const ResumeForm: React.FC<ResumeFormProps> = ({
                                 placeholder={`プロジェクト${index + 1}`}
                               />
                             ),
-                            key: `projects.${index}.title`,
+                            key: "projects.title",
                             term: "プロジェクト名"
                           },
                           {
@@ -275,7 +503,7 @@ const ResumeForm: React.FC<ResumeFormProps> = ({
                                 onBlur={handleSubmit}
                               />
                             ),
-                            key: `projects.${index}.content`,
+                            key: "projects.content",
                             term: "業務内容"
                           },
                           {
@@ -287,7 +515,7 @@ const ResumeForm: React.FC<ResumeFormProps> = ({
                                 placeholder="PG"
                               />
                             ),
-                            key: `projects.${index}.role`,
+                            key: "projects.role",
                             term: "役割"
                           },
                           {
@@ -304,8 +532,58 @@ const ResumeForm: React.FC<ResumeFormProps> = ({
                                 名
                               </React.Fragment>
                             ),
-                            key: `projects.${index}.team`,
+                            key: "projects.team",
                             term: "規模"
+                          },
+                          {
+                            description: (
+                              <FieldArray
+                                name={`projects.${index}.languageList`}
+                                render={({ push, remove }) => {
+                                  const { languageList } = projects[index];
+
+                                  return (
+                                    <SmallFieldListBlock
+                                      fields={languageList.map((_, index2) => ({
+                                        key: `projects.${index}.languageList.${index2}`,
+                                        value: (
+                                          <FieldWithIconBlock>
+                                            <Field
+                                              component={Input}
+                                              key="field"
+                                              name={`projects.${index}.languageList.${index2}`}
+                                              onBlur={handleSubmit}
+                                              placeholder="HTML"
+                                            />
+                                            <button
+                                              key="icon"
+                                              onClick={() => {
+                                                remove(index2);
+                                              }}
+                                              style={{ height: 20 }}
+                                            >
+                                              <Icon iconType={FiMinusSquare} />
+                                            </button>
+                                          </FieldWithIconBlock>
+                                        )
+                                      }))}
+                                      footer={
+                                        <button
+                                          onClick={() => {
+                                            push("");
+                                          }}
+                                          style={{ height: 20 }}
+                                        >
+                                          <Icon iconType={FiPlusSquare} />
+                                        </button>
+                                      }
+                                    />
+                                  );
+                                }}
+                              />
+                            ),
+                            key: "projects.languageList",
+                            term: "使用言語"
                           }
                         ]}
                         key="fieldList"
@@ -330,28 +608,21 @@ const ResumeForm: React.FC<ResumeFormProps> = ({
                 footer={
                   <Button
                     onClick={() => {
-                      push({
-                        content: "",
-                        dbList: [],
-                        from: "",
-                        fwMwToolList: [],
-                        languageList: [],
-                        pageBreakAfter: false,
-                        process: {
-                          requirementDefinition: false,
-                          basicDesign: false,
-                          detailedDesign: false,
-                          mountingSingleUnit: false,
-                          combinedTest: false,
-                          comprehensiveTest: false,
-                          maintenanceAndOperation: false
-                        },
-                        role: "",
-                        serverOsList: [],
-                        team: 0,
-                        title: "",
-                        to: ""
-                      });
+                      const { projects } = initialValue;
+
+                      push(
+                        projects.map(({ from, to, ...projects }) => ({
+                          ...projects,
+                          from: {
+                            month: from.month(),
+                            year: from.year()
+                          },
+                          to: {
+                            month: to.month(),
+                            year: to.year()
+                          }
+                        }))[0]
+                      );
                     }}
                     type="submit"
                   >
@@ -369,8 +640,52 @@ const ResumeForm: React.FC<ResumeFormProps> = ({
 );
 
 export default withFormik<OuterProps, Values>({
-  handleSubmit: (values, { props: { handleSubmit2 } }) => {
-    handleSubmit2(values);
+  handleSubmit: (
+    { birthday: { date, month, year }, projects, ...values },
+    { props: { handleSubmit2 } }
+  ) => {
+    handleSubmit2({
+      ...values,
+      birthday: moment()
+        .year(year)
+        .month(month)
+        .date(date),
+      projects: projects.map(
+        ({
+          from: { month: fromMonth, year: fromYear },
+          to: { month: toMonth, year: toYear },
+          ...project
+        }) => ({
+          ...project,
+          from: moment()
+            .year(fromYear)
+            .month(fromMonth),
+          to: moment()
+            .year(toYear)
+            .month(toMonth)
+        })
+      )
+    });
   },
-  mapPropsToValues: ({ initialValue }) => initialValue
+  mapPropsToValues: ({
+    initialValue: { birthday, projects, ...initialValue }
+  }) => ({
+    ...initialValue,
+    birthday: {
+      date: birthday.date(),
+      month: birthday.month(),
+      year: birthday.year()
+    },
+    projects: projects.map(({ from, to, ...projects }) => ({
+      ...projects,
+      from: {
+        month: from.month(),
+        year: from.year()
+      },
+      to: {
+        month: to.month(),
+        year: to.year()
+      }
+    }))
+  })
 })(ResumeForm);

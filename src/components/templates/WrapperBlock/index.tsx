@@ -15,14 +15,15 @@ const WrapperBlock: React.FC<WrapperBlockProps> = ({
   const [contentWidth, setFormWidth] = React.useState(clientWidth / 2);
   const [pdfWidth, setPdfWidth] = React.useState(clientWidth / 2);
 
-  const { content, pdf } = React.useMemo(
+  const { form, menu, pdf } = React.useMemo(
     () =>
       (children as React.ReactNode[]).reduce<{
-        content?: React.ReactNode;
+        form?: React.ReactNode;
+        menu?: React.ReactNode;
         pdf?: React.ReactNode;
       }>((previousValue, currentValue) => {
         const { key } = currentValue as {
-          key: "content" | "pdf";
+          key: "form" | "menu" | "pdf";
           [key: string]: any;
         };
 
@@ -47,11 +48,14 @@ const WrapperBlock: React.FC<WrapperBlockProps> = ({
 
   return (
     <div style={{ height: clientHeight }} styleName="wrapper-block">
-      <div style={{ width: contentWidth }} styleName="content">
+      <div styleName="menu">{menu}</div>
+      <div style={{ width: contentWidth }} styleName="form">
         <ReactResizeDetector handleWidth={true} onResize={handleResize} />
-        {content}
+        {form}
       </div>
-      <div style={{ width: pdfWidth }}>{pdf}</div>
+      <div style={{ width: pdfWidth }} styleName="pdf">
+        {pdf}
+      </div>
     </div>
   );
 };

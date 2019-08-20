@@ -1,6 +1,6 @@
+import Menu from './Menu';
 import ResumeForm, { ResumeFormProps } from './ResumeForm';
 import ResumeIframe, { ResumeIframeProps } from './ResumeIframe';
-import LogoImage from 'components/atoms/LogoImage';
 import ContentBlock from 'components/organisms/ContentBlock';
 import WrapperBlock from 'components/templates/WrapperBlock';
 import withClientSize, { WithClientSize } from 'hocs/withClientSize';
@@ -13,14 +13,12 @@ export type PagesProps = RouteComponentProps & WithClientSize;
 const Pages: React.FC<PagesProps> = ({
   clientSize: { clientHeight, clientWidth }
 }) => {
-  const initialValue = React.useMemo<ResumeFormProps["values"]>(
+  const initialValue = React.useMemo<
+    ArgumentTypes<ResumeFormProps["handleSubmit2"]>[0]
+  >(
     () => ({
       belongs: "",
-      birthday: {
-        date: moment().get("date"),
-        month: moment().get("month"),
-        year: moment().get("year")
-      },
+      birthday: moment(),
       education: "",
       engineerCode: "",
       expertise: "",
@@ -28,10 +26,10 @@ const Pages: React.FC<PagesProps> = ({
       projects: [
         {
           content: "",
-          dbList: [],
-          from: "",
-          fwMwToolList: [],
-          languageList: [],
+          dbList: [""],
+          from: moment(),
+          fwMwToolList: [""],
+          languageList: [""],
           process: {
             requirementDefinition: false,
             basicDesign: false,
@@ -42,10 +40,10 @@ const Pages: React.FC<PagesProps> = ({
             maintenanceAndOperation: false
           },
           role: "",
-          serverOsList: [],
+          serverOsList: [""],
           team: 0,
           title: "",
-          to: ""
+          to: moment()
         }
       ],
       qualification: "",
@@ -57,7 +55,9 @@ const Pages: React.FC<PagesProps> = ({
     []
   );
 
-  const [values, setValues] = React.useState<typeof initialValue>(initialValue);
+  const [values, setValues] = React.useState<ResumeIframeProps["values"]>(
+    initialValue
+  );
 
   const handleSubmit = React.useCallback<ResumeFormProps["handleSubmit2"]>(
     values => {
@@ -68,19 +68,11 @@ const Pages: React.FC<PagesProps> = ({
 
   return (
     <WrapperBlock clientHeight={clientHeight} clientWidth={clientWidth}>
-      <ContentBlock key="content">
-        <header key="header">
-          <LogoImage />
-        </header>
-        <ResumeForm
-          handleSubmit2={handleSubmit}
-          initialValue={initialValue}
-          key="form"
-        />
+      <Menu key="menu" />
+      <ContentBlock key="form">
+        <ResumeForm handleSubmit2={handleSubmit} initialValue={initialValue} />
       </ContentBlock>
-      <React.Fragment key="pdf">
-        <ResumeIframe values={values} />
-      </React.Fragment>
+      <ResumeIframe key="pdf" values={values} />
     </WrapperBlock>
   );
 };

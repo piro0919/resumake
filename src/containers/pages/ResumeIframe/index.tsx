@@ -61,6 +61,7 @@ const ResumeIframe: React.FC<ResumeIframeProps> = ({ values }) => {
   React.useEffect(() => {
     const {
       belongs,
+      birthday,
       education,
       engineerCode,
       expertise,
@@ -105,7 +106,7 @@ const ResumeIframe: React.FC<ResumeIframeProps> = ({ values }) => {
                 ["技術者コード", engineerCode, "所属", belongs],
                 [
                   "年齢",
-                  `満${moment().diff(moment("19890919"), "years")}歳`,
+                  `満${moment().diff(birthday, "years")}歳`,
                   "性別",
                   `${sex === "man" ? "男" : "女"}性`
                 ],

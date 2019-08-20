@@ -1,6 +1,25 @@
 .wrapper-block
-  display: flex
+  display: grid
+  grid-template-columns: repeat(2, 1fr)
+  grid-template-rows: min-content 1fr
 
-  .content
+  .menu
+    grid-column-end: 3
+    grid-column-start: 1
+    grid-row-end: 2
+    grid-row-start: 1
+    z-index: 9999
+
+  .form
+    grid-column-end: 2
+    grid-column-start: 1
+    grid-row-end: 3
+    grid-row-start: 2
     overflow-y: scroll
     resize: horizontal
+
+  .pdf
+    grid-column-end: 3
+    grid-column-start: 2
+    grid-row-end: 3
+    grid-row-start: 2
