@@ -6,7 +6,7 @@ import React from 'react';
 interface Project {
   content: string;
   dbList: string[];
-  from: any;
+  from: Moment;
   fwMwToolList: string[];
   languageList: string[];
   pageBreakAfter?: boolean;
@@ -23,7 +23,7 @@ interface Project {
   serverOsList: string[];
   team: number;
   title: string;
-  to: any;
+  to: Moment;
 }
 
 export interface ResumeIframeProps {
@@ -34,6 +34,7 @@ export interface ResumeIframeProps {
     engineerCode: string;
     expertise: string;
     nearestStation: string;
+    operation: Moment;
     projects: Project[];
     qualification: string;
     selfIntroduction: string;
@@ -266,9 +267,9 @@ const ResumeIframe: React.FC<ResumeIframeProps> = ({ values }) => {
                             rowSpan: 2,
                             text: index / 2 + 1
                           },
-                          moment(from, 'YYYYMM').format(`YYYY年MM月`),
+                          from.format(`YYYY年MM月`),
                           '-',
-                          moment(to, 'YYYYMM').format(`YYYY年MM月`),
+                          to.format(`YYYY年MM月`),
                           title,
                           role,
                           {
@@ -317,34 +318,36 @@ const ResumeIframe: React.FC<ResumeIframeProps> = ({ values }) => {
                           }
                         ]
                       : [
-                          { text: '' },
+                          '',
                           {
                             colSpan: 3,
-                            text: `(${moment(to, 'YYYYMM').diff(
-                              moment(from, 'YYYYMM'),
-                              'months'
-                            ) + 1}ヶ月間)`
+                            text: `(${to.diff(from, 'months') + 1}ヶ月間)`
                           },
-                          { text: '' },
-                          { text: '' },
-                          { text: content },
+                          '',
+                          '',
+                          content,
                           {
                             text: `チーム\n${team}名`
                           },
-                          { text: '' },
-                          { text: '' },
-                          { text: '' },
-                          { text: '' },
-                          { text: '' },
-                          { text: '' },
-                          { text: '' },
-                          { text: '' },
-                          { text: '' },
-                          { text: '' },
-                          { text: '' }
+                          '',
+                          '',
+                          '',
+                          '',
+                          '',
+                          '',
+                          '',
+                          '',
+                          '',
+                          '',
+                          ''
                         ].map(cell =>
                           pageBreakAfter
-                            ? { ...cell, pageBreak: 'after' }
+                            ? {
+                                ...(typeof cell === 'string'
+                                  ? { text: cell }
+                                  : cell),
+                                pageBreak: 'after'
+                              }
                             : cell
                         )
                 )

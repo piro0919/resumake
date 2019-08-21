@@ -1,5 +1,5 @@
-import React from 'react';
 import './style.sass';
+import React from 'react';
 
 interface Field {
   description: React.ReactNode;
@@ -14,7 +14,7 @@ export interface FieldListProps {
 const FieldList: React.FC<FieldListProps> = ({ fields }) => {
   const items = fields.map(({ description, key, term }) => (
     <React.Fragment key={key}>
-      <dt>{term}</dt>
+      <dt styleName="term">{term}</dt>
       <dd>{description}</dd>
     </React.Fragment>
   ));

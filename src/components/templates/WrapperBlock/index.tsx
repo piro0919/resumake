@@ -48,7 +48,7 @@ const WrapperBlock: React.FC<WrapperBlockProps> = ({
 
   return (
     <div style={{ height: clientHeight }} styleName="wrapper-block">
-      <div styleName="menu">{menu}</div>
+      <header styleName="menu">{menu}</header>
       <div style={{ width: contentWidth }} styleName="form">
         <ReactResizeDetector handleWidth={true} onResize={handleResize} />
         {form}

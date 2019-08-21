@@ -55,11 +55,13 @@
     "pdfmake": "0.1.58",
     "pnp-webpack-plugin": "1.5.0",
     "postcss-flexbugs-fixes": "4.1.0",
+    "postcss-import-sync2": "1.1.0",
     "postcss-loader": "3.0.0",
+    "postcss-nested": "4.1.2",
     "postcss-normalize": "7.0.1",
     "postcss-preset-env": "6.7.0",
     "postcss-safe-parser": "4.0.1",
-    "postcss-sass": "0.4.1",
+    "postcss-sass": "0.3.4",
     "prettier": "1.18.2",
     "react": "^16.9.0",
     "react-app-polyfill": "^1.0.2",
@@ -94,7 +96,7 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "build:fonts": "ts-node --project scripts/tsconfig.json scripts/buildFonts.ts",
-    "lint:sass": "stylelint 'src/**/*.sass' --fix",
+    "lint:sass": "stylelint 'src/**/*.sass' --fix; exit 0",
     "prettier": "prettier --write 'src/**/*.{ts,tsx}'",
     "watch:sass": "nodemon --exec 'npm run lint:sass' --ext sass --watch src"
   },
@@ -120,7 +122,13 @@
         {
           "filetypes": {
             ".sass": {
-              "syntax": "postcss-sass"
+              "syntax": "postcss-sass",
+              "plugins": [
+                [
+                  "postcss-import-sync2"
+                ],
+                "postcss-nested"
+              ]
             }
           }
         }

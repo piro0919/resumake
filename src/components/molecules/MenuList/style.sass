@@ -1,0 +1,31 @@
+.menu-list
+  align-items: center
+  display: grid
+  grid-auto-columns: max-content
+  grid-auto-flow: column
+  height: 100%
+
+  .item
+    height: 100%
+    position: relative
+
+    &:hover
+      .term
+        background-color: #d22f7d
+        color: #fff
+
+      .description
+        display: block
+
+    .term
+      align-items: center
+      cursor: default
+      display: flex
+      height: 100%
+      padding: 0 10px
+      white-space: nowrap
+
+    .description
+      display: none
+      position: absolute
+      top: 100%

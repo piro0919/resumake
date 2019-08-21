@@ -1,12 +1,12 @@
-import Menu from './Menu';
-import ResumeForm, { ResumeFormProps } from './ResumeForm';
-import ResumeIframe, { ResumeIframeProps } from './ResumeIframe';
 import ContentBlock from 'components/organisms/ContentBlock';
 import WrapperBlock from 'components/templates/WrapperBlock';
 import withClientSize, { WithClientSize } from 'hocs/withClientSize';
 import moment from 'moment';
 import React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
+import Menu from './Menu';
+import ResumeForm, { ResumeFormProps } from './ResumeForm';
+import ResumeIframe, { ResumeIframeProps } from './ResumeIframe';
 
 export type PagesProps = RouteComponentProps & WithClientSize;
 
@@ -18,16 +18,23 @@ const Pages: React.FC<PagesProps> = ({
   >(
     () => ({
       belongs: '',
-      birthday: moment().startOf('date'),
+      birthday: moment()
+        .add(-30, 'years')
+        .startOf('date'),
       education: '',
       engineerCode: '',
       expertise: '',
       nearestStation: '',
+      operation: moment()
+        .add(1, 'month')
+        .startOf('month'),
       projects: [
         {
           content: '',
           dbList: [''],
-          from: moment().startOf('month'),
+          from: moment()
+            .add(-1, 'year')
+            .startOf('month'),
           fwMwToolList: [''],
           languageList: [''],
           process: {
@@ -41,7 +48,7 @@ const Pages: React.FC<PagesProps> = ({
           },
           role: '',
           serverOsList: [''],
-          team: 0,
+          team: 1,
           title: '',
           to: moment().startOf('month')
         }
