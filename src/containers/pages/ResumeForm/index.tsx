@@ -549,6 +549,7 @@ const ResumeForm: React.FC<ResumeFormProps> = ({
                                     min={1}
                                     name={`projects.${index}.team`}
                                     placeholder="0"
+                                    style={{ width: 100 }}
                                     type="number"
                                   />
                                   名
@@ -583,6 +584,7 @@ const ResumeForm: React.FC<ResumeFormProps> = ({
                                                     remove(index2);
                                                   }}
                                                   style={{ height: 20 }}
+                                                  tabIndex={-1}
                                                   type="button"
                                                 >
                                                   <Icon
@@ -604,6 +606,7 @@ const ResumeForm: React.FC<ResumeFormProps> = ({
                                               push(languageList[0]);
                                             }}
                                             style={{ height: 20 }}
+                                            tabIndex={-1}
                                             type="button"
                                           >
                                             <Icon iconType={FiPlusSquare} />
@@ -642,6 +645,7 @@ const ResumeForm: React.FC<ResumeFormProps> = ({
                                                   remove(index2);
                                                 }}
                                                 style={{ height: 20 }}
+                                                tabIndex={-1}
                                                 type="button"
                                               >
                                                 <Icon
@@ -660,6 +664,7 @@ const ResumeForm: React.FC<ResumeFormProps> = ({
                                               push(dbList[0]);
                                             }}
                                             style={{ height: 20 }}
+                                            tabIndex={-1}
                                             type="button"
                                           >
                                             <Icon iconType={FiPlusSquare} />
@@ -699,6 +704,7 @@ const ResumeForm: React.FC<ResumeFormProps> = ({
                                                     remove(index2);
                                                   }}
                                                   style={{ height: 20 }}
+                                                  tabIndex={-1}
                                                   type="button"
                                                 >
                                                   <Icon
@@ -720,6 +726,7 @@ const ResumeForm: React.FC<ResumeFormProps> = ({
                                               push(serverOsList[0]);
                                             }}
                                             style={{ height: 20 }}
+                                            tabIndex={-1}
                                             type="button"
                                           >
                                             <Icon iconType={FiPlusSquare} />
@@ -759,6 +766,7 @@ const ResumeForm: React.FC<ResumeFormProps> = ({
                                                     remove(index2);
                                                   }}
                                                   style={{ height: 20 }}
+                                                  tabIndex={-1}
                                                   type="button"
                                                 >
                                                   <Icon
@@ -780,6 +788,7 @@ const ResumeForm: React.FC<ResumeFormProps> = ({
                                               push(fwMwToolList[0]);
                                             }}
                                             style={{ height: 20 }}
+                                            tabIndex={-1}
                                             type="button"
                                           >
                                             <Icon iconType={FiPlusSquare} />
@@ -848,6 +857,7 @@ const ResumeForm: React.FC<ResumeFormProps> = ({
                           onClick={() => {
                             remove(index);
                           }}
+                          tabIndex={-1}
                           type="button"
                         >
                           削除
@@ -874,6 +884,7 @@ const ResumeForm: React.FC<ResumeFormProps> = ({
                           }))[0]
                         );
                       }}
+                      tabIndex={-1}
                     >
                       追加
                     </Button>

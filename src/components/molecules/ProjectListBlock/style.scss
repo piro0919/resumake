@@ -1,9 +1,11 @@
+@import '~styles/constants';
+
 .project-list-block .project-list {
   padding-bottom: 30px;
 
   .term,
   .definition {
-    border-left: #d22f7d 1px solid;
+    border-left: 1px solid $pink;
   }
 
   .term {

@@ -13,7 +13,9 @@ export interface ProcessListProps {
 
 const ProcessList: React.FC<ProcessListProps> = ({ processes }) => {
   const items = processes.map(({ description, term, key = term }) => (
-    <li key={key}>{description}</li>
+    <li key={key} styleName="item">
+      {description}
+    </li>
   ));
 
   return <ul styleName="process-list">{items}</ul>;

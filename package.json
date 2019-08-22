@@ -24,31 +24,31 @@
     "@typescript-eslint/parser": "1.13.0",
     "babel-eslint": "10.0.2",
     "babel-loader": "8.0.6",
-    "babel-plugin-named-asset-import": "^0.3.3",
+    "babel-plugin-named-asset-import": "0.3.3",
     "babel-plugin-react-css-modules": "5.2.6",
-    "babel-preset-react-app": "^9.0.1",
-    "camelcase": "^5.2.0",
+    "babel-preset-react-app": "9.0.1",
+    "camelcase": "5.2.0",
     "case-sensitive-paths-webpack-plugin": "2.2.0",
     "child_process": "1.0.2",
     "css-loader": "2.1.1",
     "debounce": "1.2.0",
     "dotenv": "6.2.0",
     "dotenv-expand": "4.2.0",
-    "eslint": "^6.1.0",
-    "eslint-config-react-app": "^5.0.1",
+    "eslint": "6.1.0",
+    "eslint-config-react-app": "5.0.1",
     "eslint-loader": "2.2.1",
     "eslint-plugin-flowtype": "3.13.0",
     "eslint-plugin-import": "2.18.2",
     "eslint-plugin-jsx-a11y": "6.2.3",
     "eslint-plugin-react": "7.14.3",
-    "eslint-plugin-react-hooks": "^1.6.1",
+    "eslint-plugin-react-hooks": "1.6.1",
     "file-loader": "3.0.1",
     "file-saver": "2.0.2",
     "formik": "1.5.8",
     "fs-extra": "7.0.1",
     "html-webpack-plugin": "4.0.0-beta.5",
     "identity-obj-proxy": "3.0.0",
-    "is-wsl": "^1.1.0",
+    "is-wsl": "1.1.0",
     "mini-css-extract-plugin": "0.5.0",
     "moment": "2.24.0",
     "moment-locales-webpack-plugin": "1.1.0",
@@ -58,18 +58,16 @@
     "pdfmake": "0.1.58",
     "pnp-webpack-plugin": "1.5.0",
     "postcss-flexbugs-fixes": "4.1.0",
-    "postcss-import-sync2": "1.1.0",
     "postcss-loader": "3.0.0",
-    "postcss-nested": "4.1.2",
     "postcss-normalize": "7.0.1",
     "postcss-preset-env": "6.7.0",
     "postcss-safe-parser": "4.0.1",
     "postcss-scss": "2.0.0",
     "prettier": "1.18.2",
-    "react": "^16.9.0",
-    "react-app-polyfill": "^1.0.2",
-    "react-dev-utils": "^9.0.3",
-    "react-dom": "^16.9.0",
+    "react": "16.9.0",
+    "react-app-polyfill": "1.0.2",
+    "react-dev-utils": "9.0.3",
+    "react-dom": "16.9.0",
     "react-icons": "3.7.0",
     "react-measure": "2.3.0",
     "react-resize-detector": "4.2.0",
@@ -126,13 +124,7 @@
         {
           "filetypes": {
             ".scss": {
-              "syntax": "postcss-scss",
-              "plugins": [
-                [
-                  "postcss-import-sync2"
-                ],
-                "postcss-nested"
-              ]
+              "syntax": "postcss-scss"
             }
           }
         }

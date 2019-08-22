@@ -1,5 +1,7 @@
+@import '~styles/constants';
+
 .input {
-  border-bottom: #d22f7d 1px solid;
+  border-bottom: 1px solid $pink;
   padding: 2.5px 5px;
   width: 100%;
 }

@@ -1,10 +1,10 @@
-import * as serviceWorker from './serviceWorker';
-import Containers from './containers';
 import 'moment/locale/ja';
+import 'ress';
+import './styles/global.scss';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import 'ress';
-import './styles/global.sass';
+import Containers from './containers';
+import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(<Containers />, document.getElementById('root'));
 

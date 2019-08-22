@@ -1,3 +1,5 @@
+@import '~styles/constants';
+
 .checkbox-input-label {
   display: flex;
 
@@ -7,12 +9,12 @@
   }
 
   .styled-checkbox {
-    border: #d22f7d 1px solid;
+    border: 1px solid $pink;
     height: 15px;
     width: 15px;
 
     &.checked::before {
-      color: #d22f7d;
+      color: $pink;
       content: '\2713';
       display: block;
       padding-left: 1px;
