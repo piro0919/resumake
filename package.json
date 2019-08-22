@@ -64,7 +64,7 @@
     "postcss-normalize": "7.0.1",
     "postcss-preset-env": "6.7.0",
     "postcss-safe-parser": "4.0.1",
-    "postcss-sass": "0.4.1",
+    "postcss-scss": "2.0.0",
     "prettier": "1.18.2",
     "react": "^16.9.0",
     "react-app-polyfill": "^1.0.2",
@@ -82,6 +82,7 @@
     "style-loader": "1.0.0",
     "stylelint": "10.1.0",
     "stylelint-config-css-modules": "1.4.0",
+    "stylelint-config-recommended-scss": "3.3.0",
     "stylelint-config-sass-guidelines": "6.0.0",
     "stylelint-scss": "3.9.4",
     "sweetalert": "2.1.2",
@@ -97,11 +98,11 @@
   },
   "scripts": {
     "start": "node scripts/start.js",
-    "build": "node scripts/build.js",
+    "build": "npm run build:fonts && node scripts/build.js",
     "build:fonts": "ts-node --project scripts/tsconfig.json scripts/buildFonts.ts",
-    "lint:sass": "stylelint 'src/**/*.sass' --fix; exit 0",
+    "lint:scss": "stylelint 'src/**/*.scss' --fix; exit 0",
     "prettier": "prettier --write 'src/**/*.{ts,tsx}'",
-    "watch:sass": "nodemon --exec 'npm run lint:sass' --ext sass --watch src"
+    "watch:scss": "nodemon --exec 'npm run lint:scss' --ext scss --watch src"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -124,8 +125,8 @@
         "react-css-modules",
         {
           "filetypes": {
-            ".sass": {
-              "syntax": "postcss-sass",
+            ".scss": {
+              "syntax": "postcss-scss",
               "plugins": [
                 [
                   "postcss-import-sync2"

@@ -1,4 +1,4 @@
-import './style.sass';
+import './style.scss';
 import Select, { SelectProps } from 'components/atoms/Select';
 import React from 'react';
 

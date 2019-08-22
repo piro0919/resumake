@@ -1,4 +1,4 @@
-import './style.sass';
+import './style.scss';
 import CheckboxInput, { CheckboxInputProps } from 'components/atoms/CheckboxInput';
 import React from 'react';
 

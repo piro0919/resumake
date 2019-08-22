@@ -1,4 +1,4 @@
-import './style.sass';
+import './style.scss';
 import React from 'react';
 import Measure from 'react-measure';
 

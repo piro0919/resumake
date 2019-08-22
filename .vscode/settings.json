@@ -6,5 +6,7 @@
   "prettier.singleQuote": true,
   "prettier.stylelintIntegration": true,
   "sassFormat.indent": 2,
-  "sassFormat.useSingleQuotes": true
+  "sassFormat.useSingleQuotes": true,
+  "scssFormatter.singleQuote": true,
+  "scssFormatter.printWidth": 100
 }

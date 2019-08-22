@@ -1,4 +1,4 @@
-import './style.sass';
+import './style.scss';
 import RadioInput, { RadioInputProps } from 'components/atoms/RadioInput';
 import React from 'react';
 

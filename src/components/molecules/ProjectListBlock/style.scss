@@ -1,0 +1,21 @@
+.project-list-block .project-list {
+  padding-bottom: 30px;
+
+  .term,
+  .definition {
+    border-left: #d22f7d 1px solid;
+  }
+
+  .term {
+    font-weight: bold;
+    padding: 30px 0 30px 15px;
+
+    &:not(:first-child) {
+      margin-top: 30px;
+    }
+  }
+
+  .definition {
+    padding: 0 0 30px 15px;
+  }
+}

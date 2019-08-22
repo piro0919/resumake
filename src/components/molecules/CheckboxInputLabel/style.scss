@@ -1,0 +1,21 @@
+.checkbox-input-label {
+  display: flex;
+
+  .label {
+    margin-right: 2.5px;
+    white-space: nowrap;
+  }
+
+  .styled-checkbox {
+    border: #d22f7d 1px solid;
+    height: 15px;
+    width: 15px;
+
+    &.checked::before {
+      color: #d22f7d;
+      content: '\2713';
+      display: block;
+      padding-left: 1px;
+    }
+  }
+}

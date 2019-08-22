@@ -1,0 +1,7 @@
+.field-list .term {
+  padding-bottom: 5px;
+
+  &:not(:first-child) {
+    padding-top: 30px;
+  }
+}

@@ -1,0 +1,24 @@
+.radio-label {
+  align-items: center;
+  display: flex;
+
+  .styled-radio {
+    align-items: center;
+    border: #d22f7d 1px solid;
+    border-radius: 50%;
+    display: flex;
+    height: 15px;
+    justify-content: center;
+    margin-right: 2.5px;
+    width: 15px;
+
+    &.checked::before {
+      background-color: #d22f7d;
+      border-radius: 50%;
+      content: '';
+      display: block;
+      height: 75%;
+      width: 75%;
+    }
+  }
+}

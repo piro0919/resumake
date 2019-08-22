@@ -1,0 +1,22 @@
+.select {
+  border: #d22f7d 1px solid;
+  position: relative;
+
+  &::before {
+    border-left: transparent 5px solid;
+    border-right: transparent 5px solid;
+    border-top: #d22f7d 5px solid;
+    content: '';
+    display: block;
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .styled-select {
+    background: transparent;
+    position: relative;
+    width: 100%;
+  }
+}

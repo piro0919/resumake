@@ -1,14 +1,12 @@
 {
   "extends": [
-    "stylelint-config-sass-guidelines",
-    "stylelint-config-css-modules"
+    "stylelint-config-css-modules",
+    "stylelint-config-recommended-scss",
+    "stylelint-config-sass-guidelines"
   ],
   "plugins": ["stylelint-scss"],
   "rules": {
-    "block-opening-brace-space-before": null,
-    "declaration-block-trailing-semicolon": null,
-    "max-nesting-depth": null,
-    "selector-max-compound-selectors": null
+    "max-nesting-depth": null
   },
-  "syntax": "sass"
+  "syntax": "scss"
 }
