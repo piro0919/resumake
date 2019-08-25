@@ -1,6 +1,3 @@
-import Menu from './Menu';
-import ResumeForm, { ResumeFormProps } from './ResumeForm';
-import ResumeIframe from './ResumeIframe';
 import ContentBlock from 'components/organisms/ContentBlock';
 import WrapperBlock from 'components/templates/WrapperBlock';
 import withClientSize, { WithClientSize } from 'hocs/withClientSize';
@@ -9,6 +6,9 @@ import pdfMake, { PageSize } from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 import React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
+import Menu from './Menu';
+import ResumeForm, { ResumeFormProps } from './ResumeForm';
+import ResumeIframe from './ResumeIframe';
 
 export type PagesProps = RouteComponentProps & WithClientSize;
 
@@ -128,9 +128,9 @@ const Pages: React.FC<PagesProps> = ({
             fillColor: (_: number, __: any, columnIndex: number) =>
               columnIndex % 2 ? null : '#ccf',
             hLineWidth: (index: number, node: any) =>
-              index === 0 || index === node.table.body.length ? 1 : 0.5,
+              !index || index === node.table.body.length ? 1 : 0.5,
             vLineWidth: (index: number, node: any) =>
-              index === 0 || index === node.table.widths.length ? 1 : 0.5
+              !index || index === node.table.widths.length ? 1 : 0.5
           },
           margin: [0, 0, 0, 5],
           table: {

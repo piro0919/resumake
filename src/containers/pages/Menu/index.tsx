@@ -1,4 +1,3 @@
-import swal from '@sweetalert/with-react';
 import MenuList from 'components/molecules/MenuList';
 import SubMenuList from 'components/molecules/SubMenuList';
 import MenuBarBlock from 'components/organisms/MenuBarBlock';
@@ -6,6 +5,7 @@ import { saveAs } from 'file-saver';
 import { TCreatedPdf } from 'pdfmake/build/pdfmake';
 import React from 'react';
 import swal2 from 'sweetalert';
+import swal from '@sweetalert/with-react';
 
 export interface MenuProps {
   json: string;
@@ -14,6 +14,15 @@ export interface MenuProps {
 
 const Menu: React.FC<MenuProps> = ({ json, pdf }) => {
   const ref = React.useRef<HTMLInputElement>(null);
+  const [currentPdf, setCurrentPdf] = React.useState<typeof pdf>(pdf);
+
+  React.useEffect(() => {
+    if (!pdf) {
+      return;
+    }
+
+    setCurrentPdf(pdf);
+  }, [pdf]);
 
   return (
     <MenuBarBlock>
@@ -48,11 +57,11 @@ const Menu: React.FC<MenuProps> = ({ json, pdf }) => {
                   },
                   {
                     handleClick: () => {
-                      if (!pdf) {
+                      if (!currentPdf) {
                         return;
                       }
 
-                      pdf.download('resume.pdf');
+                      currentPdf.download('resume.pdf');
                     },
                     term: '名前を付けて保存'
                   }
