@@ -150,8 +150,6 @@ const Pages: React.FC<PagesProps> = ({
       }
     ].filter(({ value }) => value !== undefined);
 
-    console.log(firstTableBody);
-
     return pdfMake.createPdf({
       content: [
         {

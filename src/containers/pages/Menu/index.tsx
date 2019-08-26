@@ -1,7 +1,7 @@
 import MenuList from 'components/molecules/MenuList';
 import SubMenuList from 'components/molecules/SubMenuList';
 import MenuBarBlock from 'components/organisms/MenuBarBlock';
-import { saveAs } from 'file-saver';
+// import { saveAs } from 'file-saver';
 import { TCreatedPdf } from 'pdfmake/build/pdfmake';
 import React from 'react';
 import swal2 from 'sweetalert';
@@ -33,28 +33,28 @@ const Menu: React.FC<MenuProps> = ({ json, pdf }) => {
             description: (
               <SubMenuList
                 subMenus={[
-                  {
-                    handleClick: () => {
-                      const blob = new Blob([json], {
-                        type: 'application/json'
-                      });
+                  // {
+                  //   handleClick: () => {
+                  //     const blob = new Blob([json], {
+                  //       type: 'application/json'
+                  //     });
 
-                      saveAs(blob, 'resumake.json');
-                    },
-                    term: '名前を付けてレジュメイクデータを保存'
-                  },
-                  {
-                    handleClick: () => {
-                      const { current } = ref;
+                  //     saveAs(blob, 'resumake.json');
+                  //   },
+                  //   term: '名前を付けてレジュメイクデータを保存'
+                  // },
+                  // {
+                  //   handleClick: () => {
+                  //     const { current } = ref;
 
-                      if (!current) {
-                        return;
-                      }
+                  //     if (!current) {
+                  //       return;
+                  //     }
 
-                      current.click();
-                    },
-                    term: 'レジュメイクデータを開く'
-                  },
+                  //     current.click();
+                  //   },
+                  //   term: 'レジュメイクデータを開く'
+                  // },
                   {
                     handleClick: () => {
                       if (!currentPdf) {

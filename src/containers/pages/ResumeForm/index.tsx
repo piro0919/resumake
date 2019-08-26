@@ -586,7 +586,10 @@ const ResumeForm: React.FC<ResumeFormProps> = ({
                                                   onClick={() => {
                                                     remove(index2);
                                                   }}
-                                                  style={{ height: 20 }}
+                                                  style={{
+                                                    height: 20,
+                                                    width: 20
+                                                  }}
                                                   tabIndex={-1}
                                                   type="button"
                                                 >
@@ -608,7 +611,7 @@ const ResumeForm: React.FC<ResumeFormProps> = ({
 
                                               push(languageList[0]);
                                             }}
-                                            style={{ height: 20 }}
+                                            style={{ height: 20, width: 20 }}
                                             tabIndex={-1}
                                             type="button"
                                           >
@@ -647,7 +650,10 @@ const ResumeForm: React.FC<ResumeFormProps> = ({
                                                 onClick={() => {
                                                   remove(index2);
                                                 }}
-                                                style={{ height: 20 }}
+                                                style={{
+                                                  height: 20,
+                                                  width: 20
+                                                }}
                                                 tabIndex={-1}
                                                 type="button"
                                               >
@@ -666,7 +672,7 @@ const ResumeForm: React.FC<ResumeFormProps> = ({
 
                                               push(dbList[0]);
                                             }}
-                                            style={{ height: 20 }}
+                                            style={{ height: 20, width: 20 }}
                                             tabIndex={-1}
                                             type="button"
                                           >
@@ -706,7 +712,10 @@ const ResumeForm: React.FC<ResumeFormProps> = ({
                                                   onClick={() => {
                                                     remove(index2);
                                                   }}
-                                                  style={{ height: 20 }}
+                                                  style={{
+                                                    height: 20,
+                                                    width: 20
+                                                  }}
                                                   tabIndex={-1}
                                                   type="button"
                                                 >
@@ -728,7 +737,7 @@ const ResumeForm: React.FC<ResumeFormProps> = ({
 
                                               push(serverOsList[0]);
                                             }}
-                                            style={{ height: 20 }}
+                                            style={{ height: 20, width: 20 }}
                                             tabIndex={-1}
                                             type="button"
                                           >
@@ -768,7 +777,10 @@ const ResumeForm: React.FC<ResumeFormProps> = ({
                                                   onClick={() => {
                                                     remove(index2);
                                                   }}
-                                                  style={{ height: 20 }}
+                                                  style={{
+                                                    height: 20,
+                                                    width: 20
+                                                  }}
                                                   tabIndex={-1}
                                                   type="button"
                                                 >
@@ -790,7 +802,7 @@ const ResumeForm: React.FC<ResumeFormProps> = ({
 
                                               push(fwMwToolList[0]);
                                             }}
-                                            style={{ height: 20 }}
+                                            style={{ height: 20, width: 20 }}
                                             tabIndex={-1}
                                             type="button"
                                           >
