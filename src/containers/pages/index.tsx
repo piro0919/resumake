@@ -99,6 +99,7 @@ const Pages: React.FC<PagesProps> = ({
       engineerCode,
       expertise,
       nearestStation,
+      operation,
       projects,
       qualification,
       selfIntroduction,
@@ -114,6 +115,43 @@ const Pages: React.FC<PagesProps> = ({
       projectRows.push(project);
     });
 
+    const firstTableBody = [
+      {
+        key: '技術者コード',
+        value: engineerCode
+      },
+      {
+        key: '所属',
+        value: belongs
+      },
+      {
+        key: '年齢',
+        value: `満${moment().diff(birthday, 'years')}歳`
+      },
+      {
+        key: '性別',
+        value: `${sex === 'man' ? '男' : '女'}性`
+      },
+      {
+        key: '資格',
+        value: qualification
+      },
+      {
+        key: '学歴',
+        value: education
+      },
+      {
+        key: '稼働',
+        value: operation.format('YYYY年M月D日〜')
+      },
+      {
+        key: '最寄り駅',
+        value: nearestStation
+      }
+    ].filter(({ value }) => value !== undefined);
+
+    console.log(firstTableBody);
+
     return pdfMake.createPdf({
       content: [
         {
@@ -127,24 +165,28 @@ const Pages: React.FC<PagesProps> = ({
           layout: {
             fillColor: (_: number, __: any, columnIndex: number) =>
               columnIndex % 2 ? null : '#ccf',
-            hLineWidth: (index: number, node: any) =>
-              !index || index === node.table.body.length ? 1 : 0.5,
-            vLineWidth: (index: number, node: any) =>
-              !index || index === node.table.widths.length ? 1 : 0.5
+            hLineWidth: (index: number, { table: { body } }: any) =>
+              !index || index === body.length ? 1 : 0.5,
+            vLineWidth: (index: number, { table: { widths } }: any) =>
+              !index || index === widths.length ? 1 : 0.5
           },
           margin: [0, 0, 0, 5],
           table: {
-            body: [
-              ['技術者コード', engineerCode, '所属', belongs],
-              [
-                '年齢',
-                `満${moment().diff(birthday, 'years')}歳`,
-                '性別',
-                `${sex === 'man' ? '男' : '女'}性`
-              ],
-              ['資格', qualification, '学歴', education],
-              ['稼働', '2019年10月1日～', '最寄り駅', nearestStation]
-            ],
+            body: firstTableBody
+              .filter((_, index) => !(index % 2))
+              .map(({ key, value }, index) => {
+                const columns = [key, value];
+
+                if (firstTableBody.length <= index * 2 + 1) {
+                  return [...columns, '', ''];
+                }
+
+                const { key: nextKey, value: nextValue } = firstTableBody[
+                  index * 2 + 1
+                ];
+
+                return [...columns, nextKey, nextValue];
+              }),
             widths: [50, '*', 50, '*']
           }
         },
@@ -152,10 +194,10 @@ const Pages: React.FC<PagesProps> = ({
           layout: {
             fillColor: (_: number, __: any, columnIndex: number) =>
               columnIndex % 2 ? null : '#ccf',
-            hLineWidth: (index: number, node: any) =>
-              index === 0 || index === node.table.body.length ? 1 : 0.5,
-            vLineWidth: (index: number, node: any) =>
-              index === 0 || index === node.table.widths.length ? 1 : 0.5
+            hLineWidth: (index: number, { table: { body } }: any) =>
+              !index || index === body.length ? 1 : 0.5,
+            vLineWidth: (index: number, { table: { widths } }: any) =>
+              !index || index === widths.length ? 1 : 0.5
           },
           margin: [0, 0, 0, 5],
           table: {
@@ -171,10 +213,10 @@ const Pages: React.FC<PagesProps> = ({
           layout: {
             fillColor: (_: number, __: any, columnIndex: number) =>
               columnIndex % 2 ? null : '#ccf',
-            hLineWidth: (index: number, node: any) =>
-              index === 0 || index === node.table.body.length ? 1 : 0.5,
-            vLineWidth: (index: number, node: any) =>
-              index === 0 || index === node.table.widths.length ? 1 : 0.5
+            hLineWidth: (index: number, { table: { body } }: any) =>
+              !index || index === body.length ? 1 : 0.5,
+            vLineWidth: (index: number, { table: { widths } }: any) =>
+              !index || index === widths.length ? 1 : 0.5
           },
           margin: [0, 0, 0, 5],
           table: {
@@ -188,10 +230,10 @@ const Pages: React.FC<PagesProps> = ({
               rowIndex <= 1 || (columnIndex === 0 && rowIndex !== 12 + 2)
                 ? '#ccf'
                 : null,
-            hLineWidth: (index: number, node: any) =>
-              index === 0 || index === node.table.body.length ? 1 : 0.5,
-            vLineWidth: (index: number, node: any) =>
-              index === 0 || index === node.table.widths.length ? 1 : 0.5
+            hLineWidth: (index: number, { table: { body } }: any) =>
+              !index || index === body.length ? 1 : 0.5,
+            vLineWidth: (index: number, { table: { widths } }: any) =>
+              !index || index === widths.length ? 1 : 0.5
           },
           table: {
             body: [

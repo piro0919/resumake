@@ -4,4 +4,8 @@
   border-bottom: 1px solid $pink;
   padding: 2.5px 5px;
   width: 100%;
+
+  &:disabled {
+    opacity: 0.5;
+  }
 }

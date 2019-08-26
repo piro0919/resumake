@@ -18,6 +18,7 @@ import Input from './Input';
 import RadioLabel from './RadioLabel';
 import SelectLabel from './SelectLabel';
 import Textarea from './Textarea';
+import ToggleInputBlock from './ToggleInputBlock';
 
 interface Project {
   content: string;
@@ -49,14 +50,14 @@ interface Project {
 }
 
 interface Values {
-  belongs: string;
+  belongs?: string;
   birthday: {
     date: number;
     month: number;
     year: number;
   };
   education: string;
-  engineerCode: string;
+  engineerCode?: string;
   expertise: string;
   nearestStation: string;
   operation: {
@@ -121,7 +122,8 @@ const ResumeForm: React.FC<ResumeFormProps> = ({
                 {
                   description: (
                     <Field
-                      component={Input}
+                      component={ToggleInputBlock}
+                      label="非表示"
                       name="engineerCode"
                       placeholder="ENG0123456789"
                     />
@@ -132,7 +134,8 @@ const ResumeForm: React.FC<ResumeFormProps> = ({
                 {
                   description: (
                     <Field
-                      component={Input}
+                      component={ToggleInputBlock}
+                      label="非表示"
                       name="belongs"
                       placeholder="個人事業主"
                     />
@@ -848,6 +851,16 @@ const ResumeForm: React.FC<ResumeFormProps> = ({
                               ),
                               key: 'projects.process',
                               term: '担当工程'
+                            },
+                            {
+                              description: (
+                                <Field
+                                  component={CheckboxInputLabel}
+                                  name={`projects.${index}.pageBreakAfter`}
+                                />
+                              ),
+                              key: 'projects.pageBreakAfter',
+                              term: '改ページ'
                             }
                           ]}
                           key="fieldList"
