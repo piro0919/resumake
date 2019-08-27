@@ -1,47 +1,10 @@
-import moment, { Moment } from 'moment';
+import moment from 'moment';
 import pdfMake, { PageSize, TCreatedPdf } from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 import React from 'react';
 
-interface Project {
-  content: string;
-  dbList: string[];
-  from: Moment;
-  fwMwToolList: string[];
-  languageList: string[];
-  pageBreakAfter?: boolean;
-  process: {
-    requirementDefinition: boolean;
-    basicDesign: boolean;
-    detailedDesign: boolean;
-    mountingSingleUnit: boolean;
-    combinedTest: boolean;
-    comprehensiveTest: boolean;
-    maintenanceAndOperation: boolean;
-  };
-  role: string;
-  serverOsList: string[];
-  team: number;
-  title: string;
-  to: Moment;
-}
-
 export interface WithPdf {
-  createPdf: (values: {
-    belongs?: string;
-    birthday: Moment;
-    education: string;
-    engineerCode?: string;
-    expertise: string;
-    nearestStation: string;
-    operation: Moment;
-    projects: Project[];
-    qualification: string;
-    selfIntroduction: string;
-    sex: 'man' | 'woman';
-    specialty: string;
-    specialtyBusiness: string;
-  }) => TCreatedPdf;
+  createPdf: (values: Values) => TCreatedPdf;
 }
 
 function withPdf<TOutter>(
@@ -87,11 +50,11 @@ function withPdf<TOutter>(
       const firstTableBody = [
         {
           key: '技術者コード',
-          value: engineerCode
+          value: engineerCode || ''
         },
         {
           key: '所属',
-          value: belongs
+          value: belongs || ''
         },
         {
           key: '年齢',

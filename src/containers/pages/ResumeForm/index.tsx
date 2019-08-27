@@ -10,7 +10,7 @@ import ProjectListBlock from 'components/molecules/ProjectListBlock';
 import SectionList from 'components/molecules/SectionList';
 import SmallFieldListBlock from 'components/molecules/SmallFieldListBlock';
 import { Field, FieldArray, Form, FormikProps, withFormik } from 'formik';
-import moment, { Moment } from 'moment';
+import moment from 'moment';
 import React from 'react';
 import { FiMinusSquare, FiPlusSquare } from 'react-icons/fi';
 import CheckboxInputLabel from './CheckboxInputLabel';
@@ -20,77 +20,38 @@ import SelectLabel from './SelectLabel';
 import Textarea from './Textarea';
 import ToggleInputBlock from './ToggleInputBlock';
 
-interface Project {
-  content: string;
-  dbList: string[];
+interface FormikProject extends Omit<Project, 'from' | 'to'> {
   from: {
     month: number;
     year: number;
   };
-  fwMwToolList: string[];
-  languageList: string[];
-  pageBreakAfter?: boolean;
-  process: {
-    requirementDefinition: boolean;
-    basicDesign: boolean;
-    detailedDesign: boolean;
-    mountingSingleUnit: boolean;
-    combinedTest: boolean;
-    comprehensiveTest: boolean;
-    maintenanceAndOperation: boolean;
-  };
-  role: string;
-  serverOsList: string[];
-  team: number;
-  title: string;
   to: {
     month: number;
     year: number;
   };
 }
 
-interface Values {
-  belongs?: string;
+interface FormikValues
+  extends Omit<Values, 'birthday' | 'operation' | 'projects'> {
   birthday: {
     date: number;
     month: number;
     year: number;
   };
-  education: string;
-  engineerCode?: string;
-  expertise: string;
-  nearestStation: string;
   operation: {
     date: number;
     month: number;
     year: number;
   };
-  projects: Project[];
-  qualification: string;
-  selfIntroduction: string;
-  sex: 'man' | 'woman';
-  specialty: string;
-  specialtyBusiness: string;
-}
-
-interface SubmitValuesProject extends Omit<Project, 'from' | 'to'> {
-  from: Moment;
-  to: Moment;
-}
-
-interface SubmitValues
-  extends Omit<Values, 'birthday' | 'operation' | 'projects'> {
-  birthday: Moment;
-  operation: Moment;
-  projects: SubmitValuesProject[];
+  projects: FormikProject[];
 }
 
 interface OuterProps {
-  handleSubmit2: (values: SubmitValues) => void;
-  initialValue: SubmitValues;
+  handleSubmit2: (values: Values) => void;
+  initialValue: Values;
 }
 
-export type ResumeFormProps = FormikProps<Values> & OuterProps;
+export type ResumeFormProps = FormikProps<FormikValues> & OuterProps;
 
 const ResumeForm: React.FC<ResumeFormProps> = ({
   handleSubmit,
@@ -924,7 +885,7 @@ const ResumeForm: React.FC<ResumeFormProps> = ({
   );
 };
 
-export default withFormik<OuterProps, Values>({
+export default withFormik<OuterProps, FormikValues>({
   handleSubmit: (
     {
       birthday: {

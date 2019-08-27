@@ -6,6 +6,7 @@ import withXlsx, { WithXlsx } from 'hocs/withXlsx';
 import moment from 'moment';
 import React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
+import { compose } from 'recompose';
 import Menu from './Menu';
 import ResumeForm, { ResumeFormProps } from './ResumeForm';
 import ResumeIframe from './ResumeIframe';
@@ -111,12 +112,6 @@ const Pages: React.FC<PagesProps> = ({
     </WrapperBlock>
   );
 };
-
-function compose<TInner extends TOutter, TOutter = {}>(
-  ...functions: ((hoge: any) => any)[]
-): (component: React.FC<TInner>) => React.FC<TOutter> {
-  return component => functions.reduce((comp, func) => func(comp), component);
-}
 
 export default compose<PagesProps, TOutter>(
   withClientSize,
