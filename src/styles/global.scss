@@ -31,8 +31,9 @@ html {
     }
 
     iframe,
-    img {
-      vertical-align: bottom;
+    img,
+    svg {
+      vertical-align: middle;
     }
 
     ul {

@@ -16,7 +16,7 @@ const LabeledRadioFieldList: React.FC<LabeledRadioFieldListProps> = ({
   const items = React.useMemo(
     () =>
       fields.map(({ key, value }) => (
-        <li className="item" key={key}>
+        <li styleName="item" key={key}>
           {value}
         </li>
       )),

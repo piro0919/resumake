@@ -1,6 +1,6 @@
 .wrapper-block {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: min-content 1fr;
   grid-template-rows: min-content 1fr;
 
   .menu {

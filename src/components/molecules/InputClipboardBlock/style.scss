@@ -1,0 +1,9 @@
+.input-clipboard-block {
+  display: grid;
+  grid-template-columns: max-content min-content;
+  justify-content: center;
+
+  .input {
+    text-align: center;
+  }
+}
