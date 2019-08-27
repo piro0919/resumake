@@ -3,7 +3,7 @@ import InputClipboardBlock from 'components/molecules/InputClipboardBlock';
 import MenuList from 'components/molecules/MenuList';
 import SubMenuList from 'components/molecules/SubMenuList';
 import MenuBarBlock from 'components/organisms/MenuBarBlock';
-// import { saveAs } from 'file-saver';
+import { saveAs } from 'file-saver';
 import { TCreatedPdf } from 'pdfmake/build/pdfmake';
 import React from 'react';
 import { FaAmazon } from 'react-icons/fa';
@@ -14,9 +14,10 @@ import swal from '@sweetalert/with-react';
 export interface MenuProps {
   json: string;
   pdf?: TCreatedPdf;
+  xlsx: any;
 }
 
-const Menu: React.FC<MenuProps> = ({ json, pdf }) => {
+const Menu: React.FC<MenuProps> = ({ json, pdf, xlsx }) => {
   const ref = React.useRef<HTMLInputElement>(null);
   const [currentPdf, setCurrentPdf] = React.useState<typeof pdf>(pdf);
   const id = React.useMemo(() => uniqid(), []);
@@ -60,6 +61,15 @@ const Menu: React.FC<MenuProps> = ({ json, pdf }) => {
                   //   },
                   //   term: 'レジュメイクデータを開く'
                   // },
+                  {
+                    handleClick: () => {
+                      saveAs(
+                        new Blob([xlsx], { type: 'application/octet-stream' }),
+                        'resume.xlsx'
+                      );
+                    },
+                    term: '名前を付けてエクセルデータを保存'
+                  },
                   {
                     handleClick: () => {
                       if (!currentPdf) {

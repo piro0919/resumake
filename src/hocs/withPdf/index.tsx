@@ -220,7 +220,7 @@ function withPdf<TOutter>(
                   {
                     rowSpan: 2,
                     text: `役割
-                          規模`
+                    規模`
                   },
                   {
                     rowSpan: 2,

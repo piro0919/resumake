@@ -2,6 +2,7 @@ import ContentBlock from 'components/organisms/ContentBlock';
 import WrapperBlock from 'components/templates/WrapperBlock';
 import withClientSize, { WithClientSize } from 'hocs/withClientSize';
 import withPdf, { WithPdf } from 'hocs/withPdf';
+import withXlsx, { WithXlsx } from 'hocs/withXlsx';
 import moment from 'moment';
 import React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
@@ -9,11 +10,14 @@ import Menu from './Menu';
 import ResumeForm, { ResumeFormProps } from './ResumeForm';
 import ResumeIframe from './ResumeIframe';
 
-export type PagesProps = RouteComponentProps & WithClientSize & WithPdf;
+type TOutter = RouteComponentProps;
+
+export type PagesProps = TOutter & WithClientSize & WithPdf & WithXlsx;
 
 const Pages: React.FC<PagesProps> = ({
   clientSize: { clientHeight, clientWidth },
-  createPdf
+  createPdf,
+  createXlsx
 }) => {
   const initialValue = React.useMemo<
     ArgumentTypes<ResumeFormProps['handleSubmit2']>[0]
@@ -83,6 +87,14 @@ const Pages: React.FC<PagesProps> = ({
     return createPdf(values);
   }, [createPdf, ref, values]);
 
+  const xlsx = React.useMemo(() => {
+    if (JSON.stringify(ref.current) === JSON.stringify(values)) {
+      return;
+    }
+
+    return createXlsx(values);
+  }, [createXlsx, ref, values]);
+
   const json = React.useMemo(() => JSON.stringify(values), [values]);
 
   React.useEffect(() => {
@@ -91,7 +103,7 @@ const Pages: React.FC<PagesProps> = ({
 
   return (
     <WrapperBlock clientHeight={clientHeight} clientWidth={clientWidth}>
-      <Menu json={json} key="menu" pdf={pdf} />
+      <Menu json={json} key="menu" pdf={pdf} xlsx={xlsx} />
       <ContentBlock key="form">
         <ResumeForm handleSubmit2={handleSubmit} initialValue={initialValue} />
       </ContentBlock>
@@ -100,4 +112,14 @@ const Pages: React.FC<PagesProps> = ({
   );
 };
 
-export default withClientSize(withPdf(Pages));
+function compose<TInner extends TOutter, TOutter = {}>(
+  ...functions: ((hoge: any) => any)[]
+): (component: React.FC<TInner>) => React.FC<TOutter> {
+  return component => functions.reduce((comp, func) => func(comp), component);
+}
+
+export default compose<PagesProps, TOutter>(
+  withClientSize,
+  withPdf,
+  withXlsx
+)(Pages);
