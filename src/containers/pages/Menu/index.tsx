@@ -1,3 +1,4 @@
+import swal from '@sweetalert/with-react';
 import Icon from 'components/atoms/Icon';
 import InputClipboardBlock from 'components/molecules/InputClipboardBlock';
 import MenuList from 'components/molecules/MenuList';
@@ -9,7 +10,6 @@ import React from 'react';
 import { FaAmazon } from 'react-icons/fa';
 import swal2 from 'sweetalert';
 import uniqid from 'uniqid';
-import swal from '@sweetalert/with-react';
 
 export interface MenuProps {
   json: string;
@@ -61,15 +61,15 @@ const Menu: React.FC<MenuProps> = ({ json, pdf, xlsx }) => {
                   //   },
                   //   term: 'レジュメイクデータを開く'
                   // },
-                  {
-                    handleClick: () => {
-                      saveAs(
-                        new Blob([xlsx], { type: 'application/octet-stream' }),
-                        'resume.xlsx'
-                      );
-                    },
-                    term: '名前を付けてエクセルデータを保存'
-                  },
+                  // {
+                  //   handleClick: () => {
+                  //     saveAs(
+                  //       new Blob([xlsx], { type: 'application/octet-stream' }),
+                  //       'resume.xlsx'
+                  //     );
+                  //   },
+                  //   term: '名前を付けてエクセルデータを保存'
+                  // },
                   {
                     handleClick: () => {
                       if (!currentPdf) {
