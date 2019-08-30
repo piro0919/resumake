@@ -241,14 +241,14 @@ const ResumeForm: React.FC<ResumeFormProps> = ({
                               label="年"
                               name="operation.year"
                             >
-                              {Array.from(Array(100).keys())
-                                .reverse()
+                              {Array.from(Array(5).keys())
+                                // .reverse()
                                 .map(value => (
                                   <option
                                     key={value}
-                                    value={moment().year() - value}
+                                    value={moment().year() + value}
                                   >
-                                    {moment().year() - value}
+                                    {moment().year() + value}
                                   </option>
                                 ))}
                             </Field>

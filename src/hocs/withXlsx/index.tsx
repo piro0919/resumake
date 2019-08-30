@@ -91,9 +91,9 @@ function withXlsx<TOutter>(
 
         // 個人情報
         data[1][0] = '技術者コード';
-        data[1][2] = engineerCode;
+        data[1][2] = engineerCode || '';
         data[1][5] = '所属';
-        data[1][7] = belongs;
+        data[1][7] = belongs || '';
         data[2][0] = '年齢';
         data[2][2] = `満${moment().diff(birthday, 'years')}歳`;
         data[2][5] = '性別';
